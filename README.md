@@ -6,12 +6,12 @@ A set of special tools to cope with my daily tasks. It's based on [Python 3.6.5]
 
 All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 
-### Words Recorder
-
-[Words Recorder](words-recorder) is an app to record the word that you are unfamiliar with when you do some reading, based on Python, PyQt5 and MySQL. 
+### Google Translate
+[Google Translate](google-translate) is a translation app using [Google translate api](https://github.com/ssut/py-googletrans).
 
 <div align="center">
-    <img src="images/Words-Recorder.png" alt="Words Recorder" height="350" />
+    <img src="images/Google-Translate.png" alt="Google Translate English" height="350" />
+    <img src="images/Google-Translate-zh_CN.png" alt="Google Translate English" height="350" />
 </div>
 
 ### Bilibili Kit
@@ -22,9 +22,10 @@ All image resources in this repo are from [iconfont](http://www.iconfont.cn).
     <img src="images/Bilibili-Kit.png" alt="Bilibili Kit" height="350" />
 </div>
 
-### Google Translate
-[Google Translate](google-translate) is a translation app using [Google translate api](https://github.com/ssut/py-googletrans).
+### Words Recorder
+
+[Words Recorder](words-recorder) is an app to record the word that you are unfamiliar with when you do some reading, based on Python, PyQt5 and MySQL. 
 
 <div align="center">
-    <img src="images/Google-Translate.png" alt="Google Translate" height="350" />
+    <img src="images/Words-Recorder.png" alt="Words Recorder" height="350" />
 </div>
