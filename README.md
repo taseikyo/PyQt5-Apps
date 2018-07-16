@@ -11,3 +11,11 @@ A set of special tools to cope with my daily tasks. It's based on [Python 3.6.5]
 <div align="center">
     <img src="images/Words-Recorder.png" alt="Words Recorder" height="350" />
 </div>
+
+### Bilibili Kit
+
+[Bilibili Kit](bilibili-kit) is an app to download video, cover and  'bullet screen' from [bilibili](https://www.bilibili.com/). 
+
+<div align="center">
+    <img src="images/Bilibili-Kit.png" alt="Bilibili Kit" height="350" />
+</div>
