@@ -4,6 +4,8 @@
 
 A set of special tools to cope with my daily tasks. It's based on [Python 3.6.5](https://www.python.org/downloads/release/python-365/) and [PyQt5](https://riverbankcomputing.com/software/pyqt/download5), licensed under the [GPL v3](LICENSE).
 
+All image resources in this repo are from [iconfont](http://www.iconfont.cn).
+
 ### Words Recorder
 
 [Words Recorder](words-recorder) is an app to record the word that you are unfamiliar with when you do some reading, based on Python, PyQt5 and MySQL. 
@@ -18,4 +20,11 @@ A set of special tools to cope with my daily tasks. It's based on [Python 3.6.5]
 
 <div align="center">
     <img src="images/Bilibili-Kit.png" alt="Bilibili Kit" height="350" />
+</div>
+
+### Google Translate
+[Google Translate](google-translate) is a translation app using [Google translate api](https://github.com/ssut/py-googletrans).
+
+<div align="center">
+    <img src="images/Google-Translate.png" alt="Google Translate" height="350" />
 </div>
