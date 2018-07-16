@@ -3,8 +3,8 @@ Google Translate is a translation app using [Google translate api](https://githu
 
 ### Screenshot
 <div align="center">
-    <img src="images/Google-Translate.png" alt="Google Translate English" height="350" />
-    <img src="images/Google-Translate-zh_CN.png" alt="Google Translate English" height="350" />
+    <img src="../images/Google-Translate.png" alt="Google Translate English" height="350" />
+    <img src="../images/Google-Translate-zh_CN.png" alt="Google Translate English" height="350" />
 </div>
 
 ### Background
