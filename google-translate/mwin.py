@@ -8,8 +8,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget
-from utils import trans_To_zh_CN
+from PyQt5.QtCore import QTimer, QThread, pyqtSignal
+# from utils import trans_To_zh_CN
 import re
+from googletrans import Translator
+
+GTransData = ''
 
 class Ui_MWin(QWidget):
     def __init__(self):
@@ -132,9 +136,10 @@ class Ui_MWin(QWidget):
 
     def retranslateUi(self, MWin):
         _translate = QtCore.QCoreApplication.translate
-        MWin.setWindowTitle(_translate("MWin", "谷歌翻译App"))
+        MWin.setWindowTitle(_translate("MWin", "谷歌翻译App v1.1"))
         self.originLabel.setText(_translate("MWin", "原文："))
         self.transLabel.setText(_translate("MWin", "翻译："))
+        self.originText.setPlaceholderText(_translate("MWin", "Ctrl+h 获取帮助"))
         self.realTimeTrans.setText(_translate("MWin", "实时翻译"))
         self.paperMode.setText(_translate("MWin", "论文模式"))
         self.alwaysFront.setText(_translate("MWin", "窗口置顶"))
@@ -159,7 +164,12 @@ class Ui_MWin(QWidget):
         text = self.originText.toPlainText()
         if text:
             try:
-                self.transText.setPlainText(trans_To_zh_CN(text))
+                # self.transText.setPlainText(trans_To_zh_CN(text))
+                self.t=GTranslator(text)
+                self.t.start()
+                self.transText.setPlainText("")
+                self.transText.setPlaceholderText("翻译中...")
+                self.t.trigger.connect(self.translated)
             except:
                 self.transText.setPlainText("翻译出错！")
 
@@ -196,8 +206,47 @@ class Ui_MWin(QWidget):
                 content = re.sub(r'', '', content)
             self.originText.setPlainText(content)
             try:
-                data = trans_To_zh_CN(content)
-                self.transText.setPlainText(data)
+                # data = trans_To_zh_CN(content)
+                # self.transText.setPlainText(data)
+                self.t=GTranslator(content)
+                self.t.start()
+                self.transText.setPlainText("")
+                self.transText.setPlaceholderText("翻译中...")
+                self.t.trigger.connect(self.translated)
             except:
                 self.transText.setPlainText("翻译出错！")
+
+    def translated(self):
+        global GTransData
+        if GTransData:
+            self.transText.setPlainText(GTransData)
+        else:
+            self.transText.setPlainText("翻译出错！")
+        GTransData = ""
+
+class GTranslator(QThread): 
+    trigger = pyqtSignal()
+    def __init__(self, content):
+        super().__init__()
+        self.content = content
+  
+    def run(self): 
+        """
+        将origin翻译成中文，origin可以是一个字符串，也可以是一个列表
+        """
+        Data = []
+        global GTransData
+        T = Translator(service_urls=['translate.google.cn'])
+        # ts = T.translate(['The quick brown fox', 'jumps over', 'the lazy dog'], dest='zh-CN')
+        # print('原文', origin)
+        ts = T.translate(self.content, dest='zh-CN')
+        # print('翻译后',ts.text)
+        if isinstance(ts.text, list):
+            for i in ts:
+                Data.append(i.text)
+            GTransData = Data
+        else:
+            GTransData = ts.text
+        self.trigger.emit()         # 翻译完毕后发出信号
+        
 import res_rc
