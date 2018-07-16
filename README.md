@@ -6,7 +6,7 @@ A set of special tools to cope with my daily tasks. It's based on [Python 3.6.5]
 
 ### Words Recorder
 
-Words Recorder is an app to record the word that you are unfamiliar with when you do some reading, based on Python, PyQt5 and MySQL. 
+[Words Recorder](words-recorder) is an app to record the word that you are unfamiliar with when you do some reading, based on Python, PyQt5 and MySQL. 
 
 <div align="center">
     <img src="images/Words-Recorder.png" alt="Words Recorder" height="350" />
