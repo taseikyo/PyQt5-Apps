@@ -1,36 +1,37 @@
 ## Google Translate
-Google Translate App using PyQt5.
+Google Translate is a translation app using [Google translate api](https://github.com/ssut/py-googletrans).
 
-### 截图
+### Screenshot
 <div align="center">
-    <img src="images/img-1.png" alt="Screenshot">
+    <img src="images/Google-Translate.png" alt="Google Translate English" height="350" />
+    <img src="images/Google-Translate-zh_CN.png" alt="Google Translate English" height="350" />
 </div>
 
-### 背景
-在我看论文的时候遇到看不懂的词、句子都是用 [谷歌翻译](https://translate.google.cn) ，然而每次都要 Ctrl+C，Ctrl+V，还有看 PDF 的时候复制会自带回车还有奇怪的符号，就很麻烦，然后想着为什么不能自己做个小应用使用谷歌翻译的 API 来直接翻译呢？在 Gayhub 上看了下关于谷歌翻译的项目，突然发现了一个 [有趣的项目](https://github.com/ssut/py-googletrans) ，然后就有了这个项目，主要是将英语翻译成中文。
+### Background
+When I read the thesis, I used [Google Translate](https://translate.google.cn) to translate the words and sentences that I could not understand. But every time I had to Ctrl+C, Ctrl+V. Moreover when copying sentences from a PDF, it will bring a additional enter and a strange symbol. It is very troublesome. Then I wonder why I can't make a app to use the Google Translate API to translate directly. I view the Google Translate project on GitHub and suddenly found an [interesting repo](https://github.com/ssut/py-googletrans).
 
-### 功能介绍
-1. 手动输入翻译。在原文对应的文本框中输入想要翻译的英文，然后点击 `翻译` 按钮，或者使用快捷键 Ctrl+Enter 
-2. 论文模式。使用论文模式需要勾选实时翻译，我这里的实时翻译是监控剪贴板，然后将复制的文字翻译成中文，并且在论文模式下会自动将回车和多个空格替换为一个空格，以及去掉一个特殊的符号 `` 
-3. 窗口总在前面。勾选此选框会导致窗口一直处于所有应用的最前面。
+### Feature
+1. Enter the translation manually. Enter the English you want to translate in the 'original' input field, then click the `translate` button, or use the shortcut Ctrl+Enter
+2. paper model. To use the paper mode, you need to check the real-time translation. My real-time translation here is to monitor the clipboard, then translate the copied text into Chinese, and automatically replace the additional enter and multiple spaces with a space in the paper mode, and remove one special symbol ``
+3. window top. Checking this box will cause the window to remain at the top of all applications.
 
-### 演示
-1. 普通模式
+### illustration
+1. regular mode
 <div align="center">
-    <img src="images/img-2.gif" alt="普通模式">
+    <img src="../images/Google-Translate-1.gif" alt="regular mode">
 </div>
 
-2. 论文模式
+2. paper mode
 <div align="center">
-    <img src="images/img-3.gif" alt="论文模式">
+    <img src="../images/Google-Translate-2.gif" alt="paper mode">
 </div>
 
-3. 非论文模式
+3. non paper mode
 <div align="center">
-    <img src="images/img-4.gif" alt="非论文模式">
+    <img src="../images/Google-Translate-3.gif" alt="non paper mode">
 </div>
 
-### 安装说明
+### Installation
 ```
 >> git clone https://github.com/LewisTian/GoogleTranslateApp.git
 >> cd GoogleTranslateApp
@@ -38,13 +39,12 @@ Google Translate App using PyQt5.
 >> python main.py
 ```
 
-### 解压使用
-除了上面的代码安装，这里提供了一个打包好的压缩包 ，下载解压即可使用，[点我下载](https://github.com/LewisTian/GoogleTranslateApp/releases)
+### Download
+[click me to download](https://github.com/LewisTian/PyQt5-Tools/releases)
 
-### 参考
+### References
 - https://github.com/ssut/py-googletrans
 -  https://blog.csdn.net/killua_hzl/article/details/5288769
 
 ### License
-GoogleTranslateApp is licensed under the [GNU General Public License v3.0 License](LICENSE).
-本项目仅供学习交流和私人使用，禁止用作商业用途。
+GNU General Public License v3.0 License
