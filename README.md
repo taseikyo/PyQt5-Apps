@@ -1,6 +1,6 @@
 <img src="images/icon.png" alt="logo" height="120" align="right" />
 
-## PyQt5 Tools
+## PyQt5 Apps
 
 A set of special tools to cope with my daily tasks. It's based on [Python 3.6.5](https://www.python.org/downloads/release/python-365/) and [PyQt5](https://riverbankcomputing.com/software/pyqt/download5), licensed under the [GPL v3](LICENSE).
 
@@ -11,7 +11,6 @@ All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 
 <div align="center">
     <img src="images/Google-Translate.png" alt="Google Translate English" height="350" />
-    <img src="images/Google-Translate-zh_CN.png" alt="Google Translate English" height="350" />
 </div>
 
 ### Bilibili Kit
