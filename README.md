@@ -28,3 +28,11 @@ All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 <div align="center">
     <img src="images/Words-Recorder.png" alt="Words Recorder" height="350" />
 </div>
+
+### HUST Electricity Fee
+
+[HUST Electricity Fee](hust-electricity-fee) is an app to query [HUST](http://www.hust.edu.cn/) student dormitory electricity fee from [科大中天电量查询系统](http://202.114.18.218/Main.aspx). 
+
+<div align="center">
+    <img src="images/HUST-Electricity-Fee.png" alt="HUST Electricity Fee" height="400" />
+</div>
