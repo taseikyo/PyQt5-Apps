@@ -218,7 +218,7 @@ class BilibiliKit(QMainWindow, Ui_MWin):
                 else:
                     item = QTableWidgetItem('{0}/{0}'.format(slices))
                     self.downloadWidget.setItem(k, 2, item)
-                    QMessageBox.about(self, '哔哩哔哩工具箱 v1.1 - ©Tich', '{} 下载完成！'.format(self.title))
+                    QMessageBox.about(self, '哔哩哔哩工具箱 v1.1 - ©Tich', '{} 下载完成！'.format(self.downloadWidget.item(k, 0).text()))
                 break
         
 
