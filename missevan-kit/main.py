@@ -16,6 +16,8 @@ import requests
 import os
 import threading
 from contextlib import closing
+import time
+import random
 
 base_headers = {
     'Accept':'application/json, text/javascript, */*; q=0.01',
@@ -68,6 +70,8 @@ class MissevanKit(QMainWindow, Ui_MWin):
 
         self.toolButton.clicked.connect(lambda: QDesktopServices.openUrl(QUrl.fromLocalFile("./sound")))
 
+        self.clearAll.clicked.connect(self.clearAllDownloaded)
+
     def searchInfo(self):
         text = self.lineEdit.text()
         if not text:
@@ -93,6 +97,7 @@ class MissevanKit(QMainWindow, Ui_MWin):
         base_headers['Referer'] = 'http://www.missevan.com/sound/player?id=' + sid
         r =requests.get(url, headers = base_headers)
         data = r.json()
+        print(type(sid))
         if data['state'] == 'error':
             return
         user = data['info']['user']['username']
@@ -120,6 +125,7 @@ class MissevanKit(QMainWindow, Ui_MWin):
         global listInfo
         for x in sound:
             self.getSoundSrc(x, False)
+            time.sleep(0.1+random.randint(100, 200)/100)
         self.tableWidget.clearContents()
         self.tableWidget.setRowCount(len(listInfo))
         for r, x in enumerate(listInfo):
@@ -171,16 +177,19 @@ class MissevanKit(QMainWindow, Ui_MWin):
 
     def downloadSound(self):
         row = self.tableWidget.rowCount()
-        self.tableWidget2.clearContents()
-        self.tableWidget2.setRowCount(row)
+        row2 = self.tableWidget2.rowCount()
+        # self.tableWidget2.clearContents()
+        if not row:
+            return
+        self.tableWidget2.setRowCount(row+row2)
         for x in range(row):
             item = QTableWidgetItem(self.tableWidget.item(x, 1).text())
-            self.tableWidget2.setItem(x, 0, item)
-            self.tableWidget2.setItem(x, 1, QTableWidgetItem("下载中"))
+            self.tableWidget2.setItem(x+row2, 0, item)
+            self.tableWidget2.setItem(x+row2, 1, QTableWidgetItem("下载中"))
             # qpb = QProgressBar()
             # qpb.setValue(0)
             # self.tableWidget2.setCellWidget(x, 1, qpb)
-            threading.Thread(target=self.downloadSingle, args = (x, )).start()
+            threading.Thread(target=self.downloadSingle, args = (x+row2, )).start()
 
     def downloadSingle(self, index):
         url = 'http://192.168.73.133/static.missevan.com/MP3/' + self.tableWidget.item(index, 2).text()
@@ -199,6 +208,14 @@ class MissevanKit(QMainWindow, Ui_MWin):
                     file.write(data)
                     # count += len(data)
             self.tableWidget2.setItem(index, 1, QTableWidgetItem("下载完成"))
+
+    def clearAllDownloaded(self):
+        row = self.tableWidget2.rowCount()
+        if not row:
+            return
+        for x in range(row-1, -1, -1):
+            if self.tableWidget2.item(x, 1).text() == '下载完成':
+                self.tableWidget2.removeRow(x)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
