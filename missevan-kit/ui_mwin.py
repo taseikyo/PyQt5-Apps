@@ -147,6 +147,10 @@ class Ui_MWin(object):
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem)
+        self.clearAll = QtWidgets.QToolButton(self.tab2)
+        self.clearAll.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.clearAll.setObjectName("clearAll")
+        self.horizontalLayout_3.addWidget(self.clearAll)
         self.toolButton = QtWidgets.QToolButton(self.tab2)
         self.toolButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton.setObjectName("toolButton")
@@ -236,6 +240,7 @@ class Ui_MWin(object):
         item.setText(_translate("MWin", "标题"))
         item = self.tableWidget2.horizontalHeaderItem(1)
         item.setText(_translate("MWin", "下载进度"))
+        self.clearAll.setText(_translate("MWin", "清空已下载"))
         self.toolButton.setText(_translate("MWin", "打开保存文件夹"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), _translate("MWin", "下载"))
         self.plainTextEdit.setPlainText(_translate("MWin", "GitHub：LewisTian\n"
