@@ -70,7 +70,7 @@ class MissevanKit(QMainWindow, Ui_MWin):
 
         self.toolButton.clicked.connect(lambda: QDesktopServices.openUrl(QUrl.fromLocalFile("./sound")))
 
-        self.clearAll.clicked.connect(self.clearAllDownloaded)
+        # self.clearAll.clicked.connect(self.clearAllDownloaded)
 
     def searchInfo(self):
         text = self.lineEdit.text()
