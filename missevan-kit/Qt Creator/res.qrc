@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>m1.png</file>
+        <file>m2.png</file>
+        <file>m3.png</file>
+        <file>favicon.ico</file>
+        <file>alipay.jpg</file>
+        <file>weicatpay.png</file>
+    </qresource>
+</RCC>
