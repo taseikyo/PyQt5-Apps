@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/qss">
+        <file alias="style">style.qss</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file alias="exit">images/exit.png</file>
+        <file alias="export">images/export.png</file>
+        <file alias="import">images/import.png</file>
+        <file alias="icon">images/memory card.png</file>
+        <file alias="about">images/about.png</file>
+        <file alias="help">images/help.png</file>
+        <file alias="connect">images/connect.png</file>
+    </qresource>
+</RCC>
