@@ -1,3 +1,5 @@
+<img src="images/google-trans.png" alt="logo" height="120" align="right" />
+
 ## Google Translate
 Google Translate is a translation app using [Google translate api](https://github.com/ssut/py-googletrans).
 
@@ -8,7 +10,7 @@ Google Translate is a translation app using [Google translate api](https://githu
 </div>
 
 ### Background
-When I read the thesis, I used [Google Translate](https://translate.google.cn) to translate the words and sentences that I could not understand. But every time I had to Ctrl+C, Ctrl+V. Moreover when copying sentences from a PDF, it will bring a additional enter and a strange symbol. It is very troublesome. Then I wonder why I can't make a app to use the Google Translate API to translate directly. I view the Google Translate project on GitHub and suddenly found an [interesting repo](https://github.com/ssut/py-googletrans).
+When I read papers, I used [Google Translate](https://translate.google.cn) to translate the words and sentences that I could not understand. But every time I had to use shortcuts Ctrl+C, Ctrl+V. Moreover when copying sentences from a PDF, it will bring a additional enter and a strange symbol sometimes. It is very annoying. Then I wondered why I could't develop a app to use the Google Translate API to translate them directly. I viewed the Google Translate project on GitHub and found an [interesting repo](https://github.com/ssut/py-googletrans).
 
 ### Feature
 1. Enter the translation manually. Enter the English you want to translate in the 'original' input field, then click the `translate` button, or use the shortcut Ctrl+Enter
