@@ -1,4 +1,4 @@
-<img src="images/google-trans.png" alt="logo" height="120" align="right" />
+<img src="../images/google-trans.png" alt="logo" height="120" align="right" />
 
 ## Google Translate
 Google Translate is a translation app using [Google translate api](https://github.com/ssut/py-googletrans).
