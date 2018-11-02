@@ -41,6 +41,14 @@ When I read papers, I used [Google Translate](https://translate.google.cn) to tr
 >> python main.py
 ```
 
+### Package
+```
+>> git clone https://github.com/pyinstaller/pyinstaller.git
+>> cd pyinstaller
+>> python setup.py install
+>> pyinstaller -F -w main.py -p mwin.py -p res_rc.py -i google.ico
+```
+
 ### Download
 [click me to download](https://github.com/LewisTian/PyQt5-Tools/releases)
 
