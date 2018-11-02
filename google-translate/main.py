@@ -60,7 +60,7 @@ class MyWindow(QMainWindow, Ui_MWin):
         self.actionDestJapanese.triggered.connect(lambda: self.destinationLanguage(2))
         self.actionDestKorean.triggered.connect(lambda: self.destinationLanguage(3))
 
-        self.about.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://github.com/LewisTian/PyQt5-tools/tree/43d996289c48c99f6a88838deb413cb59a80ae83/google-translate')))
+        self.about.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://github.com/LewisTian/PyQt5-Apps/tree/master/google-translate')))
         self.about.setShortcut("CTRL+H")
         self.donate.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://lewistian.github.io/2018/01/01/donate/')))
         self.reportBug.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://github.com/LewisTian/PyQt5-tools/issues')))
@@ -127,7 +127,11 @@ class MyWindow(QMainWindow, Ui_MWin):
         if text:
             try:
                 # self.transText.setPlainText(trans_To_zh_CN(text))
-                print(text)
+                # print(text)
+                if self.paperMode.isChecked(): # if paper mode is true, line breaks will re replaced by blanks
+                    text = re.sub(r'\n|\s+', ' ', text)
+                    text = re.sub(r'', '', text)
+                self.originText.setPlainText(text)
                 self.t=GTranslator(self.dest, text)
                 self.t.start()
                 self.transText.setPlainText("")
