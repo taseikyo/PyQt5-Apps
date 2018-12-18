@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Qt
+*/build-*_MinGW_32bit-Debug/
+*.user
