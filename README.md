@@ -15,7 +15,7 @@ All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 [Google Translate](google-translate) is a translation app using [Google translate api](https://github.com/ssut/py-googletrans).
 
 <div align="center">
-    <img src="images/Google-Translate.png" alt="Google Translate English" height="350" />
+    <img src="images/Google-Translate.png" alt="Google Translate" title="Google Translate" width="500" />
 </div>
 
 ### Bilibili Kit
@@ -23,7 +23,7 @@ All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 [Bilibili Kit](bilibili-kit) is an app to download video, cover and  'bullet screen' from [bilibili](https://www.bilibili.com/). 
 
 <div align="center">
-    <img src="images/Bilibili-Kit.png" alt="Bilibili Kit" height="350" />
+    <img src="images/Bilibili-Kit.png" alt="Bilibili Kit"  title="Bilibili Kit" width="500" />
 </div>
 
 ### Words Recorder
@@ -31,7 +31,7 @@ All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 [Words Recorder](words-recorder) is an app to record the word that you are unfamiliar with when you do some reading, based on Python, PyQt5 and MySQL. 
 
 <div align="center">
-    <img src="images/Words-Recorder.png" alt="Words Recorder" height="350" />
+    <img src="images/Words-Recorder.png" alt="Words Recorder"  title="Words Recorder" width="500" />
 </div>
 
 ### HUST Electricity Fee
@@ -39,7 +39,7 @@ All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 [HUST Electricity Fee](hust-electricity-fee) is an app to query [HUST](http://www.hust.edu.cn/) student dormitory electricity fee from [科大中天电量查询系统](http://202.114.18.218/Main.aspx). 
 
 <div align="center">
-    <img src="images/HUST-Electricity-Fee.png" alt="HUST Electricity Fee" height="400" />
+    <img src="images/HUST-Electricity-Fee.png" alt="HUST Electricity Fee" title="HUST Electricity Fee" width="500" />
 </div>
 
 ### Missevan Kit
@@ -47,9 +47,12 @@ All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 [Missevan Kit](missevan-kit) is an app to download user's sounds from [missevan.com](http://www.missevan/). 
 
 <div align="center">
-    <img src="images/missevan-kit.png" alt="Missevan Kit" height="400" />
+    <img src="images/missevan-kit.png" alt="Missevan Kit"  title="Missevan Kit" width="500" />
 </div>
 
 ### Lossless Music Box
 
 [Lossless Music Box](lossless-music-box) is an app to download Lossless Music.
+<div align="center">
+    <img src="images/Lossless-Music-Box.png" alt="Lossless Music Box" title="Lossless Music Box" width="500" />
+</div>
