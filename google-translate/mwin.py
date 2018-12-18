@@ -12,8 +12,7 @@ class Ui_MWin(object):
     def setupUi(self, MWin):
         MWin.setObjectName("MWin")
         MWin.resize(620, 450)
-        MWin.setMinimumSize(QtCore.QSize(620, 450))
-        MWin.setMaximumSize(QtCore.QSize(16777215, 450))
+        MWin.setMinimumSize(QtCore.QSize(16777215, 16777215))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/images/icon64"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MWin.setWindowIcon(icon)
@@ -221,7 +220,7 @@ class Ui_MWin(object):
 
     def retranslateUi(self, MWin):
         _translate = QtCore.QCoreApplication.translate
-        MWin.setWindowTitle(_translate("MWin", "谷歌翻译App v1.2"))
+        MWin.setWindowTitle(_translate("MWin", "谷歌翻译App v1.2.1"))
         self.originLabel.setText(_translate("MWin", "原文："))
         self.transLabel.setText(_translate("MWin", "翻译："))
         self.originText.setPlaceholderText(_translate("MWin", "Ctrl+h获取帮助"))
