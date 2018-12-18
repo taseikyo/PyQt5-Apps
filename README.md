@@ -6,6 +6,11 @@ A set of special tools to cope with my daily tasks. It's based on [Python 3.6.5]
 
 All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 
+### Table of Contents
+| Ⅰ | Ⅱ | Ⅲ | Ⅳ | Ⅴ | Ⅵ |
+| :--------: | :---------: | :---------: | :---------: | :---------: | :---------:|
+| [Google Translate](#google-translate) | [Bilibili Kit](#bilibili-kit)|[Words Recorder](#words-recorder) | [HUST Electricity Fee](#hust-electricity-fee) |[Missevan Kit](#missevan-kit)| [Lossless Music Box](#lossless-music-box)|
+
 ### Google Translate
 [Google Translate](google-translate) is a translation app using [Google translate api](https://github.com/ssut/py-googletrans).
 
@@ -44,3 +49,7 @@ All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 <div align="center">
     <img src="images/missevan-kit.png" alt="Missevan Kit" height="400" />
 </div>
+
+### Lossless Music Box
+
+[Lossless Music Box](lossless-music-box) is an app to download Lossless Music.
