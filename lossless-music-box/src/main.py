@@ -12,6 +12,7 @@ from mwin import Ui_MWin
 import requests
 import sys
 import re
+import threading
 
 '''
 API
@@ -28,13 +29,17 @@ get song detail:
 url: http://moresound.tk/music/api.php?get_song=qq
 method: POST
 data: mid
+
+http://moresound.tk/music/api.php?download=bd&74176184=c2b5c49ad319fbada646c34197a5b10e
 '''
 
 headers = {
 	'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36',
 	'X-Requested-With': 'XMLHttpRequest',
-	'Cookie': 'Tip_of_the_day=2; encrypt_data=9393b2797f6b8514fcea144aef4a15e5973a3643e8584ab6e2f82e34ef050ffb53caae316abcc67a9b08a21e3b5334d9c96d04ddb6c41119a77628d2256376aa878dc4a0c79b9226b811497da1b8389ba4bfdf4bc2f61eddb9e7a9f04fe0fa69d5d99dc65cd353d0e00e8855e6d64efb4b45b7a20599950e24d05bfc1ef8738d',
 }
+
+with open('Cookie.txt') as f:
+	headers['Cookie'] = f.read()
 
 class MWin(QMainWindow, Ui_MWin):
 	'''Lossless Music Box'''
@@ -43,10 +48,14 @@ class MWin(QMainWindow, Ui_MWin):
 		self.setupUi(self)
 
 		self.midlist = []
+		self.setTableHeader = False
+		self.text = ''
 
 		self.iRetrieval = InforRetrieval()
 		self.iRetrieval.done.connect(self.resolveInfoDone)
 		self.iRetrieval.error.connect(self.errorHappened)
+
+		self.mDownlaod = MusicDonwload()
 
 		self.connectSlots()
 		
@@ -54,29 +63,47 @@ class MWin(QMainWindow, Ui_MWin):
 	def connectSlots(self):
 		'''connect signals with slots functions'''
 		self.searchBtn.clicked.connect(self.searchMusic)
+		self.downloadBtn.clicked.connect(self.downloadMusic)
 
 	def searchMusic(self):
 		text = self.lineEdit.text()
 		if not text: return
+		if self.text and self.text == text:
+				return
+		self.text = text
 		self.iRetrieval.w = text
 		self.iRetrieval.atype = self.comboBox.currentIndex()
 		self.iRetrieval.start()
 
+	def downloadMusic(self):
+		rows = [x for x in range(self.mtable.rowCount()) if self.mtable.item(x, 0).isSelected()]
+		if not rows: return
+		self.mDownlaod.num = rows
+		self.mDownlaod.mids = [self.midlist[x] for x in rows]
+		self.mDownlaod.ftype = [self.mtable.item(x, 1).text() for x in rows]
+		# self.mDownlaod.songinfo = [self.mtable.item(x, 2).text() + '-' + self.mtable.item(x, 3).text() for x in rows]
+		self.mDownlaod.start()
+
 	def resolveInfoDone(self, info):
-		self.tableHeader = ['#','Song','Singer','Album']
-		self.mtable.setColumnCount(len(self.tableHeader))
-		self.mtable.setHorizontalHeaderLabels(self.tableHeader)
-		self.mtable.horizontalHeader().setVisible(True)
-		self.mtable.setColumnWidth(0, 50)
-		self.mtable.setColumnWidth(1, 150)
-		self.mtable.setColumnWidth(2, 150)
+		ftype = ['qq', 'kw', 'xm', 'kg', 'bd', 'wy']
+		if not self.setTableHeader:
+			self.setTableHeader = True
+			self.tableHeader = ['#', 'from', 'Song','Singer','Album']
+			self.mtable.setColumnCount(len(self.tableHeader))
+			self.mtable.setHorizontalHeaderLabels(self.tableHeader)
+			self.mtable.horizontalHeader().setVisible(True)
+			self.mtable.setColumnWidth(0, 50)
+			self.mtable.setColumnWidth(1, 50)
+			self.mtable.setColumnWidth(2, 200)
+			self.mtable.setColumnWidth(3, 150)
 		for x in info:
 			row = self.mtable.rowCount()
 			self.mtable.insertRow(row)
 			self.mtable.setItem(row, 0, QTableWidgetItem(str(row+1)))
-			self.mtable.setItem(row, 1, QTableWidgetItem(x[1]))
-			self.mtable.setItem(row, 2, QTableWidgetItem(x[2]))
-			self.mtable.setItem(row, 3, QTableWidgetItem(x[3]))
+			self.mtable.setItem(row, 1, QTableWidgetItem(ftype[x[4]]))
+			self.mtable.setItem(row, 2, QTableWidgetItem(x[1]))
+			self.mtable.setItem(row, 3, QTableWidgetItem(x[2]))
+			self.mtable.setItem(row, 4, QTableWidgetItem(x[3]))
 			self.midlist.append(x[0])
 
 	def errorHappened(self, msg = 'an error accrued...'):
@@ -112,12 +139,41 @@ class InforRetrieval(QThread):
 				else:
 					singer = x['singer'][0]['name']
 				albumname = x['albumname']
-				ret.append([songmid, songname, singer, albumname])
+				ret.append([songmid, songname, singer, albumname, self.atype])
 		except Exception as e:
 			print(e)
 			self.error.emit()
 			return
 		self.done.emit(ret)
+
+class MusicDonwload(QThread):
+	'''下载歌曲'''
+	done = pyqtSignal(list)
+	error = pyqtSignal()
+	def __init__(self):
+		super(MusicDonwload, self).__init__()
+
+	def run(self):
+		threads = []
+
+		for i, j in enumerate(self.num):
+			t = threading.Thread(target=self.getLink, args=(self.mids[i], self.ftype[i]), name=str(j))
+			threads.append(t)
+
+		for j in threads:
+			j.start()
+
+	def getLink(self, mid, ftype):
+		url = f'http://moresound.tk/music/api.php?get_song={ftype}'
+		data = {
+			'mid': mid
+		}
+		r = requests.post(url, headers = headers, data = data).json()
+		self.singer = r['singer']
+		self.song = r['song']
+		self.url = r['url']
+		for k, v in self.url.items():
+			print(k, v)
 
 def main():
 	app = QApplication(sys.argv)

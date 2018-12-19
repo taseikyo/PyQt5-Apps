@@ -66,27 +66,27 @@
         </item>
         <item>
          <property name="text">
-          <string>酷我</string>
+          <string>kuwo</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>虾米</string>
+          <string>xiami</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>酷狗</string>
+          <string>kugou</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>百度</string>
+          <string>baidu</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>网易</string>
+          <string>netease</string>
          </property>
         </item>
        </widget>
