@@ -50,15 +50,17 @@ class MWin(QMainWindow, Ui_MWin):
 		self.midlist = []
 		self.setTableHeader = False
 		self.text = ''
+		self.mtype = -1
 
 		self.iRetrieval = InforRetrieval()
 		self.iRetrieval.done.connect(self.resolveInfoDone)
 		self.iRetrieval.error.connect(self.errorHappened)
 
 		self.mDownlaod = MusicDonwload()
+		self.mDownlaod.error.connect(self.errorHappened)
+		self.mDownlaod.done.connect(self.downloadInfoDone)
 
 		self.connectSlots()
-		
 
 	def connectSlots(self):
 		'''connect signals with slots functions'''
@@ -68,11 +70,13 @@ class MWin(QMainWindow, Ui_MWin):
 	def searchMusic(self):
 		text = self.lineEdit.text()
 		if not text: return
-		if self.text and self.text == text:
+		mtype = self.comboBox.currentIndex()
+		if self.text and self.text == text and self.mtype == mtype:
 				return
 		self.text = text
+		self.mtype = mtype
 		self.iRetrieval.w = text
-		self.iRetrieval.atype = self.comboBox.currentIndex()
+		self.iRetrieval.atype = mtype
 		self.iRetrieval.start()
 
 	def downloadMusic(self):
@@ -96,6 +100,7 @@ class MWin(QMainWindow, Ui_MWin):
 			self.mtable.setColumnWidth(1, 50)
 			self.mtable.setColumnWidth(2, 200)
 			self.mtable.setColumnWidth(3, 150)
+		self.statusBar.showMessage(f'{len(info)} songs find...')
 		for x in info:
 			row = self.mtable.rowCount()
 			self.mtable.insertRow(row)
@@ -105,6 +110,38 @@ class MWin(QMainWindow, Ui_MWin):
 			self.mtable.setItem(row, 3, QTableWidgetItem(x[2]))
 			self.mtable.setItem(row, 4, QTableWidgetItem(x[3]))
 			self.midlist.append(x[0])
+
+	def downloadInfoDone(self, data):
+		# header = ['song','singer','album','lrc','cover','url']
+		print(data)
+		header = ['song','singer','album']
+		row = self.dtable.rowCount()
+		self.dtable.insertRow(row)
+		for i, x in enumerate(header):
+			try:
+				self.dtable.setItem(row, i, QTableWidgetItem(data[x]))
+			except Exception as e:
+				pass
+		try:
+			cover = data['url']['专辑封面']
+			self.dtable.setItem(row, i+1, QTableWidgetItem(cover))
+		except Exception as e:
+			pass
+		try:
+			lrc = f"http://moresound.tk/music/{data['url']['lrc']}"
+			self.dtable.setItem(row, i+2, QTableWidgetItem(lrc))
+		except Exception as e:
+			pass
+		urls = []
+		for k, v in data['url'].items():
+			if v.find('lrc') > 0 or v.find('jpg') > 0:
+				continue
+			urls.append(f'http://moresound.tk/music/{v}')
+		qcb = QComboBox()
+		qcb.addItems(urls)
+		self.dtable.setCellWidget(row, 5, qcb)
+		if self.tabWidget.currentIndex() != 1:
+			self.tabWidget.setCurrentIndex(1)
 
 	def errorHappened(self, msg = 'an error accrued...'):
 		QMessageBox.warning(self, 'Lossless Music Box v1.0.0 ©Lewis Tian', msg, QMessageBox.Ok)
@@ -148,7 +185,7 @@ class InforRetrieval(QThread):
 
 class MusicDonwload(QThread):
 	'''下载歌曲'''
-	done = pyqtSignal(list)
+	done = pyqtSignal(dict)
 	error = pyqtSignal()
 	def __init__(self):
 		super(MusicDonwload, self).__init__()
@@ -168,12 +205,14 @@ class MusicDonwload(QThread):
 		data = {
 			'mid': mid
 		}
-		r = requests.post(url, headers = headers, data = data).json()
-		self.singer = r['singer']
-		self.song = r['song']
-		self.url = r['url']
-		for k, v in self.url.items():
-			print(k, v)
+		try:
+			r = requests.post(url, headers = headers, data = data).json()
+			self.done.emit(r)
+		except Exception as e:
+			self.error.emit()
+		# self.singer = r['singer']
+		# self.song = r['song']
+		# self.url = r['url']
 
 def main():
 	app = QApplication(sys.argv)
