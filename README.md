@@ -54,5 +54,5 @@ All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 
 [Lossless Music Box](lossless-music-box) is an app to download Lossless Music.
 <div align="center">
-    <img src="images/Lossless-Music-Box.png" alt="Lossless Music Box" title="Lossless Music Box" width="500" />
+    <img src="images/Lossless-Music-Box.gif" alt="Lossless Music Box" title="Lossless Music Box" width="500" />
 </div>
