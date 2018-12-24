@@ -3,7 +3,7 @@
 
 ### Screenshot
 <div align="center">
-    <img src="../images/Lossless-Music-Box.png" alt="Screenshot">
+    <img src="../images/Lossless-Music-Box.gif" alt="Lossless-Music-Box" title="Lossless-Music-Box">
 </div>
 
 ### Features
