@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>720</width>
-    <height>400</height>
+    <width>800</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -118,7 +118,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="downloadBtn">
+           <widget class="QToolButton" name="obtainBtn">
             <property name="enabled">
              <bool>true</bool>
             </property>
@@ -126,7 +126,7 @@
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="text">
-             <string>Download</string>
+             <string>Obtain Infos</string>
             </property>
             <property name="shortcut">
              <string>Ctrl+Return</string>
@@ -159,10 +159,10 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QComboBox" name="comboBox_2"/>
-        </item>
-        <item>
          <widget class="QTableWidget" name="dtable">
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
           <attribute name="horizontalHeaderStretchLastSection">
            <bool>true</bool>
           </attribute>
@@ -193,10 +193,52 @@
           </column>
           <column>
            <property name="text">
+            <string>progress</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
             <string>url</string>
            </property>
           </column>
          </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QToolButton" name="openFolderBtn">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string>Open Download Folder </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="downloadBtn">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string>Download</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -209,7 +251,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>720</width>
+     <width>800</width>
      <height>23</height>
     </rect>
    </property>
