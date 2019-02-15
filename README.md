@@ -1,4 +1,4 @@
-<img src="images/icon.png" alt="logo" height="120" align="right" />
+<img src="images/icon.png" alt="logo" height="120" align="right" title="PyQt5 Apps" />
 
 ## PyQt5 Apps
 
@@ -22,7 +22,7 @@ All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 
 [Bilibili Kit](bilibili-kit) is an app to download video, cover and  'bullet screen' from [bilibili](https://www.bilibili.com/). 
 
-maybe you can try [this one](https://github.com/LewisTian/bili-box)
+maybe you can try [this one](https://github.com/LewisTian/bili-box) :flags:
 
 <div align="center">
     <img src="images/Bilibili-Kit.png" alt="Bilibili Kit"  title="Bilibili Kit" />

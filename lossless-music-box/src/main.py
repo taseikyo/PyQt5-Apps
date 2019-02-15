@@ -256,7 +256,7 @@ class MusicDownload(QThread):
     def run(self):
         try:
             r = requests.get(self.url, headers = headers).json()
-            print(r['url'])
+            print(r)
             urequest.urlretrieve(r['url'], filename=f'downlaod/{self.name}.{r["suffix"]}', reporthook=self.report)
         except Exception as e:
             self.error.emit()

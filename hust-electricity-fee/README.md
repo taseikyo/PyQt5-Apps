@@ -22,7 +22,7 @@ about interface.
 ### Installation
 clone the repo and install the required packages.
 ```
->> git clone https://github.com/LewisTian/PyQt5-tools.git
+>> git clone https://github.com/LewisTian/PyQt5-Apps.git
 >> cd PyQt5-Apps/hust-electricity-fee
 >> pip install -r requirements.txt
 ```

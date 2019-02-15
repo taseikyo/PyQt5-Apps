@@ -17,7 +17,7 @@ When I read papers, I used [Google Translate](https://translate.google.cn) to tr
 2. paper model. To use the paper mode, you need to check the real-time translation. My real-time translation here is to monitor the clipboard, then translate the copied text into Chinese, and automatically replace the additional enter and multiple spaces with a space in the paper mode, and remove one special symbol ``
 3. window top. Checking this box will cause the window to remain at the top of all applications.
 
-### illustration
+### Preview
 1. regular mode
 <div align="center">
     <img src="../images/Google-Translate-1.gif" alt="regular mode">
@@ -50,7 +50,7 @@ When I read papers, I used [Google Translate](https://translate.google.cn) to tr
 ```
 
 ### Download
-[click me to download](https://github.com/LewisTian/PyQt5-Tools/releases)
+[click me to download](https://github.com/LewisTian/PyQt5-Apps/releases)
 
 ### References
 - https://github.com/ssut/py-googletrans
