@@ -13,8 +13,8 @@ Words Recorder is an app to record the word that you are unfamiliar with when yo
 ### Installation
 First, clone the repo and install the required packages.
 ```
->> git clone https://github.com/LewisTian/PyQt5-tools.git
->> cd PyQt5-tools/words-recorder
+>> git clone https://github.com/LewisTian/PyQt5-Apps.git
+>> cd PyQt5-Apps/words-recorder
 >> pip install -r requirements.txt
 ```
 Next, create a MySQL table like 'mysql.sql', and config the 'setting.ini'. The 'path' below must be matched with the 'secure_file_priv' in the 'my.ini'(Windows) / 'mysqld.cnf'(Linux). 
@@ -60,7 +60,7 @@ You can modify the data in the table('id' column is not permitted), then click t
 Click the 'delete' button or press 'Ctrl+D'. You can delete multiple lines at once. 
 
 ### style sheet
-You can write your own style sheet named 'style.qss' in the 'PyQt5-tools/words-recorder' directory.
+You can write your own style sheet named 'style.qss' in the 'PyQt5-Apps/words-recorder' directory.
 
 ### License
 GNU General Public License v3.0

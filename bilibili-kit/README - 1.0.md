@@ -21,7 +21,7 @@
 </div>
 
 ### 下载使用
-[点我下载](https://github.com/LewisTian/PyQt5-tools/releases)
+[点我下载](https://github.com/LewisTian/PyQt5-Apps/releases)
 
 ### License
 GNU General Public License v3.0 License
