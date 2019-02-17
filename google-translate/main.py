@@ -43,7 +43,7 @@ class MyWindow(QMainWindow, Ui_MWin):
         self.realTimeTrans.clicked.connect(self.realTimeTransFunc) # real-time translate
 
         self.go.clicked.connect(self.transTextToZhCN)
-        self.go.setShortcut("Ctrl+Return")
+        self.go.setShortcut("CTRL+Return")
 
         self.copy.clicked.connect(self.copySlot)
 
@@ -60,10 +60,10 @@ class MyWindow(QMainWindow, Ui_MWin):
         self.actionDestJapanese.triggered.connect(lambda: self.destinationLanguage(2))
         self.actionDestKorean.triggered.connect(lambda: self.destinationLanguage(3))
 
-        self.about.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://github.com/LewisTian/PyQt5-Apps/tree/master/google-translate')))
+        self.about.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://github.com/LewisTian/PyQt5-Apps/tree/PyQt5-Apps/google-translate')))
         self.about.setShortcut("CTRL+H")
         self.donate.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://lewistian.github.io/2018/01/01/donate/')))
-        self.reportBug.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://github.com/LewisTian/PyQt5-tools/issues')))
+        self.reportBug.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://github.com/LewisTian/PyQt5-Apps/issues')))
 
     def openFileSlot(self):
         filename, filetype = QFileDialog.getOpenFileName(self, 'Open File', '.')
@@ -71,7 +71,7 @@ class MyWindow(QMainWindow, Ui_MWin):
             print(filename)
             with open(filename, encoding = 'utf-8') as f:
                 try:
-                    self.originText.setPlainText(f.read())
+                    self.originText.setPlainText(str(f.read()))
                 except Exception as e:
                     self.originText.setPlainText(e.args[1])
 
@@ -125,13 +125,12 @@ class MyWindow(QMainWindow, Ui_MWin):
     def transTextToZhCN(self):
         text = self.originText.toPlainText()
         if text:
+            if self.paperMode.isChecked(): # if paper mode is true, line breaks will re replaced by blanks
+                text = re.sub(r'\n|\s+', ' ', text)
+                text = re.sub(r'', '', text)
+            self.originText.setPlainText(text)
             try:
                 # self.transText.setPlainText(trans_To_zh_CN(text))
-                # print(text)
-                if self.paperMode.isChecked(): # if paper mode is true, line breaks will re replaced by blanks
-                    text = re.sub(r'\n|\s+', ' ', text)
-                    text = re.sub(r'', '', text)
-                self.originText.setPlainText(text)
                 self.t=GTranslator(self.dest, text)
                 self.t.start()
                 self.transText.setPlainText("")
@@ -188,6 +187,7 @@ class MyWindow(QMainWindow, Ui_MWin):
                 content = re.sub(r'\n|\s+', ' ', content)
                 content = re.sub(r'', '', content)
             self.originText.setPlainText(content)
+            self.transText.setPlainText(content)
             try:
                 # data = trans_To_zh_CN(content)
                 # self.transText.setPlainText(data)
@@ -212,13 +212,16 @@ class GTranslator(QThread):
         global GTransData
         T = Translator(service_urls=['translate.google.cn'])
         # ts = T.translate(['The quick brown fox', 'jumps over', 'the lazy dog'], dest='zh-CN')
-        ts = T.translate(self.content, dest=self.dest)
-        if isinstance(ts.text, list):
-            for i in ts:
-                Data.append(i.text)
-            GTransData = Data
-        else:
-            GTransData = ts.text
+        try:
+            ts = T.translate(self.content, dest=self.dest)
+            if isinstance(ts.text, list):
+                for i in ts:
+                    Data.append(i.text)
+                GTransData = Data
+            else:
+                GTransData = ts.text
+        except:
+            GTransData = 'An error happended. Please retry...'
         self.trigger.emit()         # emit signal once translati is finfished
 
 if __name__ == "__main__":
