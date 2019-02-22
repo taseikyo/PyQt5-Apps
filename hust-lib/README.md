@@ -3,13 +3,20 @@
 
 用来查询华科馆藏的一个应用。
 
-### Donation
-如果觉得本应用还有那么点用处，可以请我喝杯咖啡:D
-<div>
-	<img src="https://github.com/LewisTian/bili-box/raw/master/images/alipay.png" alt="alipay" title="非常感谢请我喝一杯咖啡:D" width="300">
-	<img src="https://github.com/LewisTian/bili-box/raw/master/images/wechatpay.png" alt="wechatpay" title="非常感谢请我喝一杯咖啡:D" width="300">
+<div align="center">
+    <img src="../images/HUST-Lib.png" alt="Screenshot">
 </div>
 
+### KeyBindings
+双击进行查询。
+
+Key Binding                                | Description
+-------------------------------------------|---------------------------------------------------------
+<kbd>Enter</kbd>                           | 搜索
+<kbd>Ctrl + N</kbd>                        | 后一页
+<kbd>Ctrl + Shift + E</kbd>                | 最后一页
+<kbd>Ctrl + B</kbd>                        | 前一页
+<kbd>Ctrl + ENTER</kbd>                    | 跳转
 
 ### LICENSE
 Copyright (c) 2019 Lewis Tian. Licensed under the MIT license.

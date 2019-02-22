@@ -2,7 +2,7 @@
 
 ## PyQt5 Apps
 
-A set of special tools to cope with my daily tasks. It's based on [Python 3.6.5](https://www.python.org/downloads/release/python-365/) and [PyQt5](https://riverbankcomputing.com/software/pyqt/download5), licensed under the [GPL v3](LICENSE).
+A set of special tools to cope with my daily tasks. It's based on [Python 3.6+](https://www.python.org) and [PyQt5](https://riverbankcomputing.com/software/pyqt/download5), licensed under the [GPL v3](LICENSE).
 
 All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 
@@ -63,5 +63,5 @@ maybe you can try [this one](https://github.com/LewisTian/bili-box) :flags:
 
 [HUST Lib](hust-lib) is an app to query hust library collection information.
 <div align="center">
-    <img src="images/HUST-Lib.png" alt="HUST-Lib" title="HUST-Lib" />
+    <img src="images/HUST-Lib.gif" alt="HUST-Lib" title="HUST-Lib" />
 </div>

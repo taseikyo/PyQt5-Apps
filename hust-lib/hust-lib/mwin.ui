@@ -140,6 +140,9 @@
             <property name="text">
              <string>前一页</string>
             </property>
+            <property name="shortcut">
+             <string>Ctrl+Left</string>
+            </property>
            </widget>
           </item>
           <item>
@@ -157,7 +160,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="jump_page"/>
+           <widget class="QSpinBox" name="jump_page">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QToolButton" name="jump_page_btn">
@@ -172,6 +179,9 @@
             </property>
             <property name="text">
              <string>跳转</string>
+            </property>
+            <property name="shortcut">
+             <string>Ctrl+Return</string>
             </property>
            </widget>
           </item>
@@ -189,6 +199,9 @@
             <property name="text">
              <string>后一页</string>
             </property>
+            <property name="shortcut">
+             <string>Ctrl+Right</string>
+            </property>
            </widget>
           </item>
           <item>
@@ -204,6 +217,9 @@
             </property>
             <property name="text">
              <string>最后一页</string>
+            </property>
+            <property name="shortcut">
+             <string>Ctrl+Shift+Right</string>
             </property>
            </widget>
           </item>
@@ -301,7 +317,7 @@ v0.0.1 第一个简单版本@2019/2/20</string>
      <x>0</x>
      <y>0</y>
      <width>720</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
