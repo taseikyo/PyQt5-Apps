@@ -19,4 +19,4 @@ Key Binding                                | Description
 <kbd>Ctrl + ENTER</kbd>                    | 跳转
 
 ### LICENSE
-Copyright (c) 2019 Lewis Tian. Licensed under the MIT license.
+Copyright (c) 2019 Lewis Tian. Licensed under the GNU General Public License v3.0.
