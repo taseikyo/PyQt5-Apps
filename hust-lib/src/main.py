@@ -176,8 +176,11 @@ class Request(QThread):
 			soup = Soup(r.text, 'html5lib')
 			table = soup.find('table', {'calss', 'browseScreen'})
 			pages = table.find('tr', {'class', 'browsePager'})
-		except Exception as e:
-			self.error.emit(e)
+		except:
+			self.error.emit('未找到该书的信息...')
+			return
+		if not pages:
+			QDesktopServices.openUrl(QUrl(f'http://ftp.lib.hust.edu.cn/search*chx/X?SEARCH={self.kw}'))
 			return
 		last_page = pages.find_all('a')[-2]
 		link = last_page['href'] 
@@ -193,8 +196,8 @@ class Request(QThread):
 			r = requests.get(url, headers = self.headers)
 			soup = Soup(r.text, 'html5lib')
 			info = soup.find_all('tr', {'calss', 'bibItemsEntry'})
-		except Exception as e:
-			self.error.emit(e)
+		except:
+			self.error.emit('未找到该书的信息...')
 			return
 		ret = '\n'.join([x.text.replace('\n', '') for x in info])
 		self.detail_done.emit(ret)
