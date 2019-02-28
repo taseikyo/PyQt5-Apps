@@ -20,6 +20,3 @@ Key Binding                                | Description
 -------------------------------------------|--------------------------
 <kbd>Enter</kbd>                           | 搜索
 <kbd>Ctrl + Enter</kbd>                    | 下载
-
-### License
-Copyright (c) 2018 Lewis Tian. Licensed under the MIT license.
