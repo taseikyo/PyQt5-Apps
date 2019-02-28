@@ -1,0 +1,6 @@
+PyQt5
+pymysql
+configparser
+requests
+jieba
+wordcloud

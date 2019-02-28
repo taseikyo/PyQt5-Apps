@@ -1,3 +1,0 @@
-PyQt5
-pymysql
-configparser
