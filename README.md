@@ -65,3 +65,17 @@ maybe you can try [this one](https://github.com/LewisTian/bili-box) :flags:
 <div align="center">
     <img src="images/HUST-Lib.gif" alt="HUST-Lib" title="HUST-Lib" />
 </div>
+
+### WordCloud Generator
+
+[WordCloud Generator](word-cloud-generator) is an app to generator WordCloud images.
+<div align="center">
+    <img src="images/word-cloud-generator.gif" alt="WordCloud Generator" title="WordCloud Generator" />
+</div>
+
+### Donation
+If you think these apps are useful, you can buy me a cup of coffee :P
+<div>
+	<img src="images/alipay.png" alt="alipay" title="非常感谢请我喝一杯咖啡:D" width="300">
+	<img src="images/wechatpay.png" alt="wechatpay" title="非常感谢请我喝一杯咖啡:D" width="300">
+</div>
