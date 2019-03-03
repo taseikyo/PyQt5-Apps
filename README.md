@@ -7,9 +7,9 @@ A set of special tools to cope with my daily tasks. It's based on [Python 3.6+](
 All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 
 ### Table of Contents
-| Ⅰ | Ⅱ | Ⅲ | Ⅳ | Ⅴ | Ⅵ | Ⅶ | Ⅷ |
-| :--------: | :---------: | :---------: | :---------: | :---------: | :---------:| :---------:| :---------:|
-| [Google Translate](#google-translate) | [Bilibili Kit](#bilibili-kit)|[Words Recorder](#words-recorder) | [HUST Electricity Fee](#hust-electricity-fee) |[Missevan Kit](#missevan-kit)| [Lossless Music Box](#lossless-music-box)| [HUST Lib](#hust-lib)| [WordCloud Generator](#wordcloud-generator)|
+| Ⅰ | Ⅱ | Ⅲ | Ⅳ | Ⅴ | Ⅵ | Ⅶ | Ⅷ | Ⅸ|
+| :--------: | :---------: | :---------: | :---------: | :---------: | :---------:| :---------:| :---------:| :---------:|
+| [Google Translate](#google-translate) | [Bilibili Kit](#bilibili-kit)|[Words Recorder](#words-recorder) | [HUST Electricity Fee](#hust-electricity-fee) |[Missevan Kit](#missevan-kit)| [Lossless Music Box](#lossless-music-box)| [HUST Lib](#hust-lib)| [WordCloud Generator](#wordcloud-generator)|[HUST GS Grade](#hust-gs-grade) |
 
 ### Google Translate
 [Google Translate](google-translate) is a translation app using [Google translate api](https://github.com/ssut/py-googletrans).
@@ -68,9 +68,16 @@ maybe you can try [this one](https://github.com/LewisTian/bili-box) :flags:
 
 ### WordCloud Generator
 
-[WordCloud Generator](word-cloud-generator) is an app to generator WordCloud images.
+[WordCloud Generator](word-cloud-generator) is an app to generate WordCloud images.
 <div align="center">
     <img src="images/word-cloud-generator.gif" alt="WordCloud Generator" title="WordCloud Generator" />
+</div>
+
+### HUST GS Grade
+
+[HUST GS Grade](hust-gs-grade) is an app to query hust graduates' grade.
+<div align="center">
+    <img src="images/hust-gs-grade.png" alt="HUST GS Grade" title="HUST GS Grade" />
 </div>
 
 ### Donation
