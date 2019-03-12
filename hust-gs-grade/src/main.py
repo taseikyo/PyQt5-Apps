@@ -20,11 +20,11 @@ class MWin(QMainWindow, Ui_MWin):
         super(MWin, self).__init__(parent)
         self.setupUi(self)
 
-        if os.path.exists('Cookis.txt'):
-            with open('Cookis.txt') as f:
-                self.Cookis = f.read()
+        if os.path.exists('Cookies.txt'):
+            with open('Cookies.txt') as f:
+                self.Cookies = f.read()
         else:
-            self.Cookis = ''
+            self.Cookies = ''
 
         self.q = Query()
         self.q.done.connect(self.show_result)
@@ -32,20 +32,20 @@ class MWin(QMainWindow, Ui_MWin):
 
     @pyqtSlot()
     def on_in_cookie_clicked(self):
-        file = QFileDialog.getOpenFileName(self, 'Select Cookis','','text files(*.txt);;*.*')
+        file = QFileDialog.getOpenFileName(self, 'Select Cookies','','text files(*.txt);;*.*')
         if file[0]:
             try:
                 with open(file[0]) as f:
-                    self.Cookis = f.read()
+                    self.Cookies = f.read()
             except:
                 pass
 
     @pyqtSlot()
     def on_start_clicked(self):
-        if not self.Cookis:
-            self.error('Import Cookis first!!!')
+        if not self.Cookies:
+            self.error('Import Cookies first!!!')
             return
-        self.q.Cookis = self.Cookis
+        self.q.Cookies = self.Cookies
         self.q.start()
 
 
@@ -59,20 +59,20 @@ class Query(QThread):
     done = pyqtSignal(str)
     error = pyqtSignal(str)
 
-    def __init__(self, Cookis=None):
+    def __init__(self, Cookies=None):
         super(Query, self).__init__()
-        self.Cookis = Cookis
+        self.Cookies = Cookies
 
     def run(self):
-        if not self.Cookis:
-            self.error.emit('Import Cookis first!!!')
+        if not self.Cookies:
+            self.error.emit('Import Cookies first!!!')
             return
 
         url1 = 'http://yjs.hust.edu.cn/ssfw/pygl/cjgl/cjcx.do'
         url2 = 'http://yjs.hust.edu.cn/ssfw/pygl/cjgl/cjcx.do'
         headers = {
             'Connection': 'keep-alive',
-            'Cookie': self.Cookis,
+            'Cookie': self.Cookies,
             'Host': 'yjs.hust.edu.cn',
             'Referer': 'http://yjs.hust.edu.cn/ssfw/index.do',
             'Upgrade-Insecure-Requests': '1',

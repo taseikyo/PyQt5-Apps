@@ -99,7 +99,7 @@ class Ui_MWin(object):
         _translate = QtCore.QCoreApplication.translate
         MWin.setWindowTitle(_translate("MWin", "华科研究生成绩查询"))
         self.groupBox.setTitle(_translate("MWin", "Buttons"))
-        self.in_cookie.setText(_translate("MWin", "Import Cookis"))
+        self.in_cookie.setText(_translate("MWin", "Import Cookies"))
         self.start.setText(_translate("MWin", "Query"))
         self.groupBox_2.setTitle(_translate("MWin", "Information"))
         self.groupBox_3.setTitle(_translate("MWin", "Bugs Report"))
