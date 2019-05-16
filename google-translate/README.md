@@ -17,6 +17,17 @@ When I read papers, I used [Google Translate](https://translate.google.cn) to tr
 2. paper model. To use the paper mode, you need to check the real-time translation. My real-time translation here is to monitor the clipboard, then translate the copied text into Chinese, and automatically replace the additional enter and multiple spaces with a space in the paper mode, and remove one special symbol ``
 3. window top. Checking this box will cause the window to remain at the top of all applications.
 
+### replace rules
+until today (19/05/16)
+```
+ -> 
+ -> fi
+ -> ffi
+ -> ff
+ -> fl
+ -> th
+```
+
 ### Preview
 1. regular mode
 <div align="center">

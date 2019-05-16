@@ -128,6 +128,8 @@ class MyWindow(QMainWindow, Ui_MWin):
             if self.paperMode.isChecked(): # if paper mode is true, line breaks will re replaced by blanks
                 text = re.sub(r'\n|\s+', ' ', text)
                 text = re.sub(r'', '', text)
+                # add on 19/05/16
+                text = text.replace('', 'fi').replace('', 'ffi').replace('', 'ff').replace('', 'fl').replace('', 'th')
             self.originText.setPlainText(text)
             try:
                 # self.transText.setPlainText(trans_To_zh_CN(text))
@@ -186,6 +188,7 @@ class MyWindow(QMainWindow, Ui_MWin):
             if self.paperMode.isChecked(): # if paper mode is true, line breaks will re replaced by blanks
                 content = re.sub(r'\n|\s+', ' ', content)
                 content = re.sub(r'', '', content)
+                content = content.replace('', 'fi').replace('', 'ffi').replace('', 'ff').replace('', 'fl').replace('', 'th')
             self.originText.setPlainText(content)
             self.transText.setPlainText(content)
             try:
@@ -213,15 +216,15 @@ class GTranslator(QThread):
         T = Translator(service_urls=['translate.google.cn'])
         # ts = T.translate(['The quick brown fox', 'jumps over', 'the lazy dog'], dest='zh-CN')
         try:
-            ts = T.translate(self.content, dest=self.dest)
-            if isinstance(ts.text, list):
-                for i in ts:
-                    Data.append(i.text)
-                GTransData = Data
-            else:
-                GTransData = ts.text
+        	ts = T.translate(self.content, dest=self.dest)
+	        if isinstance(ts.text, list):
+	            for i in ts:
+	                Data.append(i.text)
+	            GTransData = Data
+	        else:
+	            GTransData = ts.text
         except:
-            GTransData = 'An error happended. Please retry...'
+        	GTransData = 'An error happended. Please retry...'
         self.trigger.emit()         # emit signal once translati is finfished
 
 if __name__ == "__main__":
