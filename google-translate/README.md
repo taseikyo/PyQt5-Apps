@@ -18,13 +18,16 @@ When I read papers, I used [Google Translate](https://translate.google.cn) to tr
 3. window top. Checking this box will cause the window to remain at the top of all applications.
 
 ### replace rules
-until today (19/05/16)
+until today (19/05/18)
 ```
  -> 
  -> fi
  -> ffi
  -> ff
  -> fl
+ -> ft
+ -> ft
+ -> tt
  -> th
 ```
 
