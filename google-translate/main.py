@@ -129,7 +129,7 @@ class MyWindow(QMainWindow, Ui_MWin):
                 text = re.sub(r'\n|\s+', ' ', text)
                 text = re.sub(r'', '', text)
                 # add on 19/05/16
-                text = text.replace('', 'fi').replace('', 'ffi').replace('', 'ff').replace('', 'fl').replace('', 'th')
+                text = text.replace('', 'fi').replace('', 'ffi').replace('', 'ff').replace('', 'fl').replace('', 'th').replace('', 'ft').replace('', 'ft').replace('', 'tt')
             self.originText.setPlainText(text)
             try:
                 # self.transText.setPlainText(trans_To_zh_CN(text))
@@ -185,10 +185,10 @@ class MyWindow(QMainWindow, Ui_MWin):
         if text and self.isRealTimeTrans:
             content = str(text)
             # print(content)
+            content = content.replace('', 'fi').replace('', 'ffi').replace('', 'ff').replace('', 'fl').replace('', 'th').replace('', 'ft').replace('', 'ft').replace('', 'tt')
             if self.paperMode.isChecked(): # if paper mode is true, line breaks will re replaced by blanks
                 content = re.sub(r'\n|\s+', ' ', content)
                 content = re.sub(r'', '', content)
-                content = content.replace('', 'fi').replace('', 'ffi').replace('', 'ff').replace('', 'fl').replace('', 'th')
             self.originText.setPlainText(content)
             self.transText.setPlainText(content)
             try:
