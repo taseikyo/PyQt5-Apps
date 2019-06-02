@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Date    : 2018-07-22 22:06:57
-# @Author  : Lewis Tian (2471740600@qq.com | lewis.smith.tian@gmail.com)
+# @Author  : Lewis Tian (chtian@hust.edu.cn)
 # @Link    : https://lewistian.github.io/
 # @Version : Python3.6
 # @Description : this app is to query electricity fee from http://202.114.18.218/Main.aspx

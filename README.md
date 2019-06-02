@@ -2,7 +2,7 @@
 
 ## PyQt5 Apps
 
-A set of special tools to cope with my daily tasks. It's based on [Python 3.6+](https://www.python.org) and [PyQt5](https://riverbankcomputing.com/software/pyqt/download5), licensed under the [GPL v3](LICENSE).
+A set of special tools to cope with **my daily tasks**. It's based on [Python 3.6+](https://www.python.org) and [PyQt5](https://riverbankcomputing.com/software/pyqt/download5), licensed under the [GPL v3](LICENSE).
 
 All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 
