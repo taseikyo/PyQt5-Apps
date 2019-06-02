@@ -106,4 +106,4 @@ venv.bak/
 # Qt
 */build-*_MinGW_32bit-Debug/
 *.user
-Cookie.txt
+Cookie*.txt

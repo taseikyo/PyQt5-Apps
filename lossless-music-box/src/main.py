@@ -78,7 +78,8 @@ class MWin(QMainWindow, Ui_MWin):
         if not text: return
         mtype = self.comboBox.currentIndex()
         if self.text and self.text == text and self.mtype == mtype:
-                return
+            return
+        print(text)
         self.text = text
         self.mtype = mtype
         self.iRetrieval.w = text
