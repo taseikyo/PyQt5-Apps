@@ -95,16 +95,26 @@ class MissevanKit(QMainWindow, Ui_MWin):
         url = 'http://www.missevan.com/sound/getsound?soundid=' + sid
         print(url)
         base_headers['Referer'] = 'http://www.missevan.com/sound/player?id=' + sid
-        r =requests.get(url, headers = base_headers)
+        r = requests.get(url, headers = base_headers)
         data = r.json()
-        print(type(sid))
-        if data['state'] == 'error':
+        # if data['state'] == 'error':
+        if not data['success']:
+            print('getSoundSrc error')
             return
-        user = data['info']['user']['username']
-        title = data['info']['sound']['soundstr']
-        src = data['info']['sound']['soundurl']
-        info = user+' - '+title
-        # print(info)
+        try:
+            user = data['info']['user']['username']
+        except:
+            user = 'user'
+        try:
+            title = data['info']['sound']['soundstr']
+        except:
+            title = 'title'
+        try:
+            src = data['info']['sound']['soundurl']
+        except Exception as e:
+            src = '-无法获取src/付费音频'
+        info = f'{user} - {title}'
+        print(info)
         if single:
             self.tableWidget.clearContents()
             self.tableWidget.setRowCount(1)
@@ -181,7 +191,7 @@ class MissevanKit(QMainWindow, Ui_MWin):
         # self.tableWidget2.clearContents()
         if not row:
             return
-        self.tableWidget2.setRowCount(row+row2)
+        self.tableWidget2.setRowCount(1+row2)
         for x in range(row):
             item = QTableWidgetItem(self.tableWidget.item(x, 1).text())
             self.tableWidget2.setItem(x+row2, 0, item)
@@ -192,9 +202,14 @@ class MissevanKit(QMainWindow, Ui_MWin):
             threading.Thread(target=self.downloadSingle, args = (x+row2, )).start()
 
     def downloadSingle(self, index):
-        url = 'http://192.168.73.133/static.missevan.com/MP3/' + self.tableWidget.item(index, 2).text()
-        headers['Referer'] = 'http://www.missevan.com/sound/player?id='+ self.tableWidget.item(index, 0).text()
-        title = self.tableWidget.item(index, 1).text()
+        # src正常应该类似 201709/13/xxxxxx 若第一个字符为"-" 则说明获取资源失败
+        if self.tableWidget.item(index, 2).text()[0] == '-':
+            self.tableWidget2.setItem(index, 1, QTableWidgetItem("付费音频/下载失败"))
+            return
+
+        url = f'http://192.168.73.133/static.missevan.com/MP3/{self.tableWidget.item(index, 2).text()}'
+        headers['Referer'] = f'http://www.missevan.com/sound/player?id={self.tableWidget.item(index, 0).text()}'
+        title = self.tableWidget.item(index, 1).text().replace('/', '&')
         with closing(requests.get(url, headers = headers, timeout = 3, stream=True)) as r:  
             if r.status_code != 200:
                 print(title, "获取资源失败！")
@@ -203,7 +218,7 @@ class MissevanKit(QMainWindow, Ui_MWin):
             content_size = int(r.headers['content-length']) # 内容体总大小 
             chunk_size = int(content_size/100)
             # count = 0
-            with open('sound/' + title+'.mp3', "wb") as file:  
+            with open(f'sound/{title}.mp3', "wb") as file:  
                 for data in r.iter_content(chunk_size=chunk_size):  
                     file.write(data)
                     # count += len(data)
