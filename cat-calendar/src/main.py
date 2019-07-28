@@ -138,12 +138,14 @@ class MWin(QMainWindow, Ui_MWin):
         except:
             text = '只要你坚持不懈的，去追你喜欢的人，总有一天你会被他拉黑。'
 
-        table = {ord(f): ord(t) for f, t in zip(u'，。', u',.')}
-        text = text.translate(table).replace(',', '\n').replace('.', '')
         date_w, date_h2 = ImageDraw.Draw(Image.new(mode='RGB', size=(1, 1))).textsize(text, font=normal_font)
 
+        if date_w > 930:
+            table = {ord(f): ord(t) for f, t in zip(u'，。', u',.')}
+            text = text.translate(table).replace(',', '\n').replace('.', '')
+            date_w, date_h2 = ImageDraw.Draw(Image.new(mode='RGB', size=(1, 1))).textsize(text, font=normal_font)
         # one/dutang text
-        y += inner_padding+shift*2
+        y += inner_padding+shift*3
         draw.text((outter_padding+inner_padding*2, y), text, font=normal_font, fill=text_color[1], spacing=line_space)
 
         y += date_h2+len(text.split('\n'))*line_space
