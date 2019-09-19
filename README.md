@@ -7,9 +7,10 @@ A set of special tools to cope with **my daily tasks**. It's based on [Python 3.
 All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 
 ### Table of Contents
-| Ⅰ | Ⅱ | Ⅲ | Ⅳ | Ⅴ | Ⅵ | Ⅶ | Ⅷ | Ⅸ|
-| :--------: | :---------: | :---------: | :---------: | :---------: | :---------:| :---------:| :---------:| :---------:|
-| [Google Translate](#google-translate) | [Bilibili Kit](#bilibili-kit)|[Words Recorder](#words-recorder) | [HUST Electricity Fee](#hust-electricity-fee) |[Missevan Kit](#missevan-kit)| [Lossless Music Box](#lossless-music-box)| [HUST Lib](#hust-lib)| [WordCloud Generator](#wordcloud-generator)|[Cat Calendar](#cat-calendar)|
+|           :squirrel:           |      :jack_o_lantern:          |            :beer:              |            :fish_cake:         |            :octocat:            |
+| ------------------------------ | ------------------------------ | -------------------------------| ------------------------------ | ------------------------------- |
+| [Google Translate](#google-translate) | [Bilibili Kit](#bilibili-kit) | [Words Recorder](#words-recorder) | [HUST Electricity Fee](#hust-electricity-fee) | [Missevan Kit](#missevan-kit) |
+| [Lossless Music Box](#lossless-music-box) | [HUST Lib](#hust-lib) | [WordCloud Generator](#wordcloud-generator) | [Cat Calendar](#cat-calendar) | [FFmpeg Helper](#ffmpeg-helper)  |
 
 ### Google Translate
 [Google Translate](google-translate) is a translation app using [Google translate api](https://github.com/ssut/py-googletrans).
@@ -79,6 +80,14 @@ A simple [Cat Calendar](cat-calendar) image generator that uses the "www.dutanga
 
 <div align="center">
     <img src="images/cat-calendar.gif" alt="Cat Calendar" title="Cat Calendar" />
+</div>
+
+### FFmpeg Helper
+
+[FFmpeg Helper](ffmpeg-helper) is a FFmpeg-based tool to cut/merge video.
+
+<div align="center">
+    <img src="images/ffmpeg-helper.gif" alt="FFmpeg Helper" title="FFmpeg Helper" />
 </div>
 
 ### Donation
