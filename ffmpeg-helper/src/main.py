@@ -7,6 +7,7 @@
 
 import os
 import sys
+import subprocess
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
@@ -28,6 +29,11 @@ class MWin(QMainWindow, Ui_MWin):
 
         self.mode = DURATION_MODE
 
+        self.cmder_thread = Cmder('')
+        self.cmder_thread.log.connect(self.log_display)
+        self.cmder_thread.done.connect(self.log_display)
+        self.cmder_thread.error.connect(self.error_handler)
+
     @pyqtSlot()
     def on_select_file_btn_clicked(self):
         filename, filetype = QFileDialog.getOpenFileName(self,
@@ -38,6 +44,7 @@ class MWin(QMainWindow, Ui_MWin):
 
         self.cut_file_path = filename
         self.filename_label.setText(os.path.basename(filename))
+        self.log_edit.setPlainText('')
 
     def on_duration_check_stateChanged(self, mode):
         if mode == 0:
@@ -76,12 +83,19 @@ class MWin(QMainWindow, Ui_MWin):
         else:
             cmd = f'ffmpeg -ss {start_offset} -i "{self.cut_file_path}" -vcodec copy -acodec copy -t {end_offset} "{out_file}" -y'
 
-        try:
-            with os.popen(cmd) as f:
-                print(f.read())
-        except Exception as e:
-            print(e)
+        self.cmder_thread.cmd = cmd
+        self.cmder_thread.start()
+
+    @pyqtSlot()
+    def on_extract_btn_clicked(self):
+        if not self.cut_file_path:
             return
+
+        path, file = os.path.split(self.cut_file_path)
+
+        cmd = f'''ffmpeg -i "{self.cut_file_path}" -vn -y -acodec copy "{path}/{file.split('.')[0]}.m4a"'''
+        self.cmder_thread.cmd = cmd
+        self.cmder_thread.start()
 
     def time_format_check(self, time_raw):
         '''check `time_raw` is legal
@@ -174,6 +188,40 @@ class MWin(QMainWindow, Ui_MWin):
         #     os.remove(x)
 
         os.chdir(cwd)
+
+
+    def log_display(self, text):
+        old_text = self.log_edit.toPlainText()
+        self.log_edit.setPlainText(f'{old_text}{text}')        
+
+        scrollbar = self.log_edit.verticalScrollBar()
+        if scrollbar:
+            scrollbar.setSliderPosition(scrollbar.maximum())
+
+    def error_handler(self, emsg):
+        QMessageBox.warning(self, 'FFmpeg Helper', emsg, QMessageBox.Ok)
+
+class Cmder(QThread): 
+    log = pyqtSignal(str)
+    error = pyqtSignal(str)
+    done = pyqtSignal(str)
+
+    def __init__(self, cmd):
+        super().__init__()
+        self.cmd = cmd
+  
+    def run(self):  
+        try:
+            p = subprocess.Popen(self.cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            for line in iter(p.stdout.readline, b''):
+                try:
+                    line = line.decode('utf-8')
+                except:
+                    line = line.decode('gbk')
+                self.log.emit(line)
+        except Exception as e:
+            self.error.emit(str(e))
+        self.done.emit('done')
 
 
 if __name__ == '__main__':

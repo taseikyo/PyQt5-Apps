@@ -177,6 +177,9 @@
          </layout>
         </item>
         <item>
+         <widget class="QPlainTextEdit" name="log_edit"/>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
            <spacer name="horizontalSpacer">
@@ -190,6 +193,16 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QToolButton" name="extract_btn">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string>Extract Audio</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QToolButton" name="start_btn">
