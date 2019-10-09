@@ -38,7 +38,6 @@ headers = {
     'Cache-Control':'no-cache',
     'Connection':'keep-alive',
     'Pragma':'no-cache',
-    'Host':'192.168.73.133',
     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36',
     'X-Requested-With':'ShockwaveFlash/30.0.0.113',
 }
@@ -92,11 +91,11 @@ class MissevanKit(QMainWindow, Ui_MWin):
         """获取对应sid的下载链接
         single为假表示为列表，此时需要使用first来判断是否是列表第一个来清楚表格内容
         """
-        url = 'http://www.missevan.com/sound/getsound?soundid=' + sid
-        print(url)
-        base_headers['Referer'] = 'http://www.missevan.com/sound/player?id=' + sid
+        url = f'http://www.missevan.com/sound/getsound?soundid={sid}'
+        base_headers['Referer'] = f'http://www.missevan.com/sound/player?id={sid}'
         r = requests.get(url, headers = base_headers)
         data = r.json()
+        print(data)
         # if data['state'] == 'error':
         if not data['success']:
             print('getSoundSrc error')
@@ -199,30 +198,38 @@ class MissevanKit(QMainWindow, Ui_MWin):
             # qpb = QProgressBar()
             # qpb.setValue(0)
             # self.tableWidget2.setCellWidget(x, 1, qpb)
-            threading.Thread(target=self.downloadSingle, args = (x+row2, )).start()
+            threading.Thread(target=self.downloadSingle, args = (x, row2)).start()
 
-    def downloadSingle(self, index):
-        # src正常应该类似 201709/13/xxxxxx 若第一个字符为"-" 则说明获取资源失败
+    def downloadSingle(self, index, index2):
+        '''index: table1的行数
+        index2: table2的行数
+        src正常应该类似 201709/13/xxxxxx 若第一个字符为"-" 则说明获取资源失败
+        '''
+        print(self.tableWidget.item(index, 2).text())
         if self.tableWidget.item(index, 2).text()[0] == '-':
             self.tableWidget2.setItem(index, 1, QTableWidgetItem("付费音频/下载失败"))
             return
 
-        url = f'http://192.168.73.133/static.missevan.com/MP3/{self.tableWidget.item(index, 2).text()}'
+        url = f'http://static.missevan.com/MP3/{self.tableWidget.item(index, 2).text()}'
         headers['Referer'] = f'http://www.missevan.com/sound/player?id={self.tableWidget.item(index, 0).text()}'
         title = self.tableWidget.item(index, 1).text().replace('/', '&')
         with closing(requests.get(url, headers = headers, timeout = 3, stream=True)) as r:  
             if r.status_code != 200:
                 print(title, "获取资源失败！")
                 return
-            # print('headers:', r.headers)
             content_size = int(r.headers['content-length']) # 内容体总大小 
             chunk_size = int(content_size/100)
             # count = 0
-            with open(f'sound/{title}.mp3', "wb") as file:  
-                for data in r.iter_content(chunk_size=chunk_size):  
-                    file.write(data)
+            with open(f'sound/{title}.mp3', "wb") as file:
+                try:
+                    for data in r.iter_content(chunk_size=chunk_size):  
+                        file.write(data)
+                except Exception as e:
+                    print(e)
+                    self.tableWidget2.setItem(index+index2, 1, QTableWidgetItem("下载失败"))
+                    return
                     # count += len(data)
-            self.tableWidget2.setItem(index, 1, QTableWidgetItem("下载完成"))
+            self.tableWidget2.setItem(index+index2, 1, QTableWidgetItem("下载完成"))
 
     def clearAllDownloaded(self):
         row = self.tableWidget2.rowCount()
