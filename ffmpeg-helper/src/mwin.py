@@ -2,11 +2,13 @@
 
 # Form implementation generated from reading ui file 'mwin.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.13.1
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_MWin(object):
     def setupUi(self, MWin):
@@ -163,5 +165,4 @@ class Ui_MWin(object):
         self.select_files_btn.setText(_translate("MWin", "Select Files"))
         self.start_merge_btn.setText(_translate("MWin", "Merge"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MWin", "Merge"))
-
 import res_rc

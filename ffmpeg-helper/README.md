@@ -1,6 +1,8 @@
 ## FFmpeg Helper
 
-a FFmpeg-based tool to cut/merge video
+a FFmpeg-based tool to cut/merge video and extract audio from the video.
+
+### cut video
 
 mode:
 - DURATION_MODE
