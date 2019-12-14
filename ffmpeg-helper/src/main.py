@@ -24,43 +24,61 @@ class MWin(QMainWindow, Ui_MWin):
         super(MWin, self).__init__(parent)
         self.setupUi(self)
 
-        self.cut_file_path = ''
-        self.merge_files_path = ''
+        self.cut_file_path = ""
+        self.merge_files_path = ""
 
         self.mode = DURATION_MODE
 
-        self.cmder_thread = Cmder('')
+        self.cmder_thread = Cmder("")
         self.cmder_thread.log.connect(self.log_display)
         self.cmder_thread.done.connect(self.log_display)
         self.cmder_thread.error.connect(self.error_handler)
 
+        # accept drop event
+        self.setAcceptDrops(True)
+
+    def dragEnterEvent(self, e):
+        allow_type = ["mp4", "avi", "mkv", "ts", "rmvb", "rm", "mov"]
+        _, ext = os.path.splitext(e.mimeData().text())
+        if ext[1:] in allow_type:
+            e.accept()
+        else:
+            e.ignore()
+
+    def dropEvent(self, e):
+        # e.mimeData().text() = file:///F:videio/xxx.mp4
+        filename = e.mimeData().text()[8:]
+        self.cut_file_path = filename
+        self.filename_label.setText(os.path.basename(filename))
+        self.log_edit.setPlainText("")
+
     @pyqtSlot()
     def on_select_file_btn_clicked(self):
-        filename, filetype = QFileDialog.getOpenFileName(self,
-                                                         'choose file',
-                                                         '.', '*')
+        filename, filetype = QFileDialog.getOpenFileName(self, "choose file", "", "*")
         if not filename:
             return
 
         self.cut_file_path = filename
         self.filename_label.setText(os.path.basename(filename))
-        self.log_edit.setPlainText('')
+        self.log_edit.setPlainText("")
 
     def on_duration_check_stateChanged(self, mode):
         if mode == 0:
             self.mode = ENDTIME_MODE
-            self.radio_label.setText('End Time:')
+            self.radio_label.setText("End Time:")
         else:
             self.mode = DURATION_MODE
-            self.radio_label.setText('Duration:')
+            self.radio_label.setText("Duration:")
 
     @pyqtSlot()
     def on_start_btn_clicked(self):
         if not self.cut_file_path:
             return
 
-        start_offset_raw = self.start_time_edit.text().replace('：', ':').replace(' ', '')
-        end_offset_raw = self.end_time_edit.text().replace('：', ':').replace(' ', '')
+        start_offset_raw = (
+            self.start_time_edit.text().replace("：", ":").replace(" ", "")
+        )
+        end_offset_raw = self.end_time_edit.text().replace("：", ":").replace(" ", "")
 
         start_offset = self.time_format_check(start_offset_raw)
         end_offset = self.time_format_check(end_offset_raw)
@@ -71,9 +89,8 @@ class MWin(QMainWindow, Ui_MWin):
         if (not start_offset) or (not end_offset):
             return
 
-        tmp = self.filename_label.text().split('.')
-        out_file = os.path.split(self.cut_file_path)[
-            0] + '/' + tmp[0] + '_cut.' + tmp[1]
+        tmp = os.path.splitext(self.cut_file_path)
+        out_file = f"{tmp[0]}_cut{tmp[1]}"
 
         if self.mode == ENDTIME_MODE:
             if not self.time_interval_check(start_offset, end_offset):
@@ -98,12 +115,12 @@ class MWin(QMainWindow, Ui_MWin):
         self.cmder_thread.start()
 
     def time_format_check(self, time_raw):
-        '''check `time_raw` is legal
+        """check `time_raw` is legal
         and return a legal time
-        '''
+        """
         time_legal = []
         carry = 0
-        for x in time_raw.split(':')[::-1]:
+        for x in time_raw.split(":")[::-1]:
             try:
                 tmp = int(x) + carry
                 if tmp > 59:
@@ -113,29 +130,30 @@ class MWin(QMainWindow, Ui_MWin):
                     carry = 0
                 time_legal.append(str(tmp))
             except:
-                return ''
+                return ""
         if carry:
             time_legal.append(str(carry))
-        return ':'.join(time_legal[::-1])
+        return ":".join(time_legal[::-1])
 
     def time_interval_check(self, time_start, time_end):
-        '''check end > start
-        '''
+        """check end > start
+        """
         start, end = 0, 0
         base = 1
-        for x in time_start.split(':')[::-1]:
-            start += base*int(x)
+        for x in time_start.split(":")[::-1]:
+            start += base * int(x)
             base *= 10
         base = 1
-        for x in time_end.split(':')[::-1]:
-            end += base*int(x)
+        for x in time_end.split(":")[::-1]:
+            end += base * int(x)
             base *= 10
         return start < end
 
     @pyqtSlot()
     def on_select_files_btn_clicked(self):
-        files, ok = QFileDialog.getOpenFileNames(self, 'choose file',
-                                                 '.', 'MP4 Files (*.mp4)')
+        files, ok = QFileDialog.getOpenFileNames(
+            self, "choose file", ".", "MP4 Files (*.mp4)"
+        )
         if not ok:
             return
         self.merge_files_path = files
@@ -143,7 +161,7 @@ class MWin(QMainWindow, Ui_MWin):
         self.tableWidget.clearContents()
         self.tableWidget.setRowCount(0)
         self.tableWidget.setColumnCount(1)
-        self.tableWidget.setHorizontalHeaderLabels(['Merge Filenames'])
+        self.tableWidget.setHorizontalHeaderLabels(["Merge Filenames"])
         self.tableWidget.horizontalHeader().setStretchLastSection(True)
 
         for x in range(len(files)):
@@ -161,8 +179,8 @@ class MWin(QMainWindow, Ui_MWin):
         # transform
         for x in self.merge_files_path:
             tmp = os.path.split(x)
-            out_file = tmp[0] + '/' + tmp[1].split('.')[0] + '.ts'
-            ts_files.append(tmp[1].split('.')[0] + '.ts')
+            out_file = tmp[0] + "/" + tmp[1].split(".")[0] + ".ts"
+            ts_files.append(tmp[1].split(".")[0] + ".ts")
             cmd = f'ffmpeg -i "{x}" -acodec copy -vcodec copy -absf aac_adtstoasc -y "{out_file}"'
             try:
                 with os.popen(cmd) as f:
@@ -181,7 +199,7 @@ class MWin(QMainWindow, Ui_MWin):
                 print(f.read())
         except Exception as e:
             print(e)
-            os.remove(f'{ts_files[0]}_merge.mp4')
+            os.remove(f"{ts_files[0]}_merge.mp4")
             return
 
         # for x in ts_files:
@@ -189,19 +207,19 @@ class MWin(QMainWindow, Ui_MWin):
 
         os.chdir(cwd)
 
-
     def log_display(self, text):
         old_text = self.log_edit.toPlainText()
-        self.log_edit.setPlainText(f'{old_text}{text}')        
+        self.log_edit.setPlainText(f"{old_text}{text}")
 
         scrollbar = self.log_edit.verticalScrollBar()
         if scrollbar:
             scrollbar.setSliderPosition(scrollbar.maximum())
 
     def error_handler(self, emsg):
-        QMessageBox.warning(self, 'FFmpeg Helper', emsg, QMessageBox.Ok)
+        QMessageBox.warning(self, "FFmpeg Helper", emsg, QMessageBox.Ok)
 
-class Cmder(QThread): 
+
+class Cmder(QThread):
     log = pyqtSignal(str)
     error = pyqtSignal(str)
     done = pyqtSignal(str)
@@ -209,22 +227,24 @@ class Cmder(QThread):
     def __init__(self, cmd):
         super().__init__()
         self.cmd = cmd
-  
-    def run(self):  
+
+    def run(self):
         try:
-            p = subprocess.Popen(self.cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            for line in iter(p.stdout.readline, b''):
+            p = subprocess.Popen(
+                self.cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+            )
+            for line in iter(p.stdout.readline, b""):
                 try:
-                    line = line.decode('utf-8')
+                    line = line.decode("utf-8")
                 except:
-                    line = line.decode('gbk')
+                    line = line.decode("gbk")
                 self.log.emit(line)
         except Exception as e:
             self.error.emit(str(e))
-        self.done.emit('done')
+        self.done.emit("done")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
     w = MWin()
     w.show()
