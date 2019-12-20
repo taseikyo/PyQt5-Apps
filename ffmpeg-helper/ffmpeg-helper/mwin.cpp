@@ -12,8 +12,3 @@ MWin::~MWin()
 {
     delete ui;
 }
-
-void MWin::on_duration_check_stateChanged(int arg1)
-{
-
-}
