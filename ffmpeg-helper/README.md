@@ -1,6 +1,6 @@
 ## FFmpeg Helper
 
-a FFmpeg-based tool to cut/merge video and extract audio from the video.
+a FFmpeg-based tool to cut/merge video, extract audio from the video and merge video & audio to new video.
 
 ### cut video
 
@@ -14,3 +14,10 @@ mode:
     <img src="../images/ffmpeg-helper.gif" alt="FFmpeg Helper" title="FFmpeg Helper" />
 </div>
 
+### extract audio
+
+extract audio from a video
+
+### merge video & audio
+
+merge video & audio to a new video

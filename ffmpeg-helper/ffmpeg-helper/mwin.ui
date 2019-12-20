@@ -226,11 +226,14 @@
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>Merge</string>
+        <string>Merge Videos</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QTableWidget" name="tableWidget">
+         <widget class="QTableWidget" name="merge_video_table">
+          <property name="acceptDrops">
+           <bool>false</bool>
+          </property>
           <property name="alternatingRowColors">
            <bool>true</bool>
           </property>
@@ -261,7 +264,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QToolButton" name="select_files_btn">
+           <widget class="QToolButton" name="select_video_files_btn">
             <property name="minimumSize">
              <size>
               <width>85</width>
@@ -277,7 +280,82 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="start_merge_btn">
+           <widget class="QToolButton" name="start_merge_video_btn">
+            <property name="minimumSize">
+             <size>
+              <width>85</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string>Merge</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Merge V/A</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QTableWidget" name="merge_va_table">
+          <property name="acceptDrops">
+           <bool>false</bool>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="columnCount">
+           <number>0</number>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QToolButton" name="select_va_files_btn">
+            <property name="minimumSize">
+             <size>
+              <width>85</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string>Select Files</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="start_merge_va_btn">
             <property name="minimumSize">
              <size>
               <width>85</width>

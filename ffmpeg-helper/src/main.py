@@ -18,6 +18,9 @@ from mwin import Ui_MWin
 DURATION_MODE = 0
 ENDTIME_MODE = 1
 
+ALLOW_VIDEO_TYPE = ["mp4", "avi", "mkv", "ts", "rmvb", "rm", "mov"]
+ALLOW_AUDIO_TYPE = ["m4a", "mp3", "acc", "wav", "flac"]
+
 
 class MWin(QMainWindow, Ui_MWin):
     def __init__(self, parent=None):
@@ -25,7 +28,10 @@ class MWin(QMainWindow, Ui_MWin):
         self.setupUi(self)
 
         self.cut_file_path = ""
-        self.merge_files_path = ""
+        self.merge_files_path = []
+
+        self.merge_video_path = ""
+        self.merge_audio_path = ""
 
         self.mode = DURATION_MODE
 
@@ -38,7 +44,12 @@ class MWin(QMainWindow, Ui_MWin):
         self.setAcceptDrops(True)
 
     def dragEnterEvent(self, e):
-        allow_type = ["mp4", "avi", "mkv", "ts", "rmvb", "rm", "mov"]
+        # tab1 and tab2 only accept video while tab3 accepts video and audio
+        allow_type = (
+            ALLOW_VIDEO_TYPE
+            if self.tabWidget.currentIndex() in (0, 1)
+            else ALLOW_VIDEO_TYPE + ALLOW_AUDIO_TYPE
+        )
         _, ext = os.path.splitext(e.mimeData().text())
         if ext[1:] in allow_type:
             e.accept()
@@ -48,9 +59,35 @@ class MWin(QMainWindow, Ui_MWin):
     def dropEvent(self, e):
         # e.mimeData().text() = file:///F:videio/xxx.mp4
         filename = e.mimeData().text()[8:]
-        self.cut_file_path = filename
-        self.filename_label.setText(os.path.basename(filename))
-        self.log_edit.setPlainText("")
+        tab_index = self.tabWidget.currentIndex()
+        if tab_index == 0:
+            self.cut_file_path = filename
+            self.filename_label.setText(os.path.basename(filename))
+            self.log_edit.setPlainText("")
+        elif tab_index == 1:
+            row = self.merge_video_table.rowCount()
+            if row == 0:
+                self.merge_video_table.setRowCount(0)
+                self.merge_video_table.setColumnCount(1)
+                self.merge_video_table.setHorizontalHeaderLabels(["Merge Filenames"])
+                self.merge_video_table.horizontalHeader().setStretchLastSection(True)
+            self.merge_files_path.append(filename)
+            self.merge_video_table.insertRow(row)
+            self.merge_video_table.setItem(row, 0, QTableWidgetItem(filename))
+        else:
+            row = self.merge_va_table.rowCount()
+            if row == 0:
+                self.merge_va_table.setRowCount(0)
+                self.merge_va_table.setColumnCount(1)
+                self.merge_va_table.setHorizontalHeaderLabels(["Merge Filenames"])
+                self.merge_va_table.horizontalHeader().setStretchLastSection(True)
+            self.merge_va_table.insertRow(row)
+            self.merge_va_table.setItem(row, 0, QTableWidgetItem(filename))
+            _, ext = os.path.splitext(filename)
+            if ext[1:] in ALLOW_AUDIO_TYPE:
+                self.merge_audio_path = filename
+            else:
+                self.merge_video_path = filename
 
     @pyqtSlot()
     def on_select_file_btn_clicked(self):
@@ -150,27 +187,27 @@ class MWin(QMainWindow, Ui_MWin):
         return start < end
 
     @pyqtSlot()
-    def on_select_files_btn_clicked(self):
+    def on_select_video_files_btn_clicked(self):
         files, ok = QFileDialog.getOpenFileNames(
-            self, "choose file", ".", "MP4 Files (*.mp4)"
+            self, "choose file", "", "MP4 Files (*.mp4)"
         )
         if not ok:
             return
         self.merge_files_path = files
 
-        self.tableWidget.clearContents()
-        self.tableWidget.setRowCount(0)
-        self.tableWidget.setColumnCount(1)
-        self.tableWidget.setHorizontalHeaderLabels(["Merge Filenames"])
-        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.merge_video_table.clearContents()
+        self.merge_video_table.setRowCount(0)
+        self.merge_video_table.setColumnCount(1)
+        self.merge_video_table.setHorizontalHeaderLabels(["Merge Filenames"])
+        self.merge_video_table.horizontalHeader().setStretchLastSection(True)
 
         for x in range(len(files)):
-            self.tableWidget.insertRow(x)
+            self.merge_video_table.insertRow(x)
             print(files[x])
-            self.tableWidget.setItem(x, 0, QTableWidgetItem(files[x]))
+            self.merge_video_table.setItem(x, 0, QTableWidgetItem(files[x]))
 
     @pyqtSlot()
-    def on_start_merge_btn_clicked(self):
+    def on_start_merge_video_btn_clicked(self):
         if not self.merge_files_path or len(self.merge_files_path) < 2:
             return
 
@@ -202,8 +239,8 @@ class MWin(QMainWindow, Ui_MWin):
             os.remove(f"{ts_files[0]}_merge.mp4")
             return
 
-        # for x in ts_files:
-        #     os.remove(x)
+        for x in ts_files:
+            os.remove(x)
 
         os.chdir(cwd)
 
@@ -217,6 +254,57 @@ class MWin(QMainWindow, Ui_MWin):
 
     def error_handler(self, emsg):
         QMessageBox.warning(self, "FFmpeg Helper", emsg, QMessageBox.Ok)
+
+    @pyqtSlot()
+    def on_select_va_files_btn_clicked(self):
+        files, ok = QFileDialog.getOpenFileNames(self, "choose file", "", "*")
+        if not ok:
+            return
+
+        self.merge_video_path = ""
+        self.merge_audio_path = ""
+
+        self.merge_va_table.clearContents()
+        self.merge_va_table.setRowCount(0)
+        self.merge_va_table.setColumnCount(1)
+        self.merge_va_table.setHorizontalHeaderLabels(["Merge Filenames"])
+        self.merge_va_table.horizontalHeader().setStretchLastSection(True)
+
+        for x in range(len(files)):
+            self.merge_va_table.insertRow(x)
+            print(files[x])
+            self.merge_va_table.setItem(x, 0, QTableWidgetItem(files[x]))
+
+    @pyqtSlot()
+    def on_start_merge_va_btn_clicked(self):
+        if self.merge_va_table.rowCount() < 2:
+            return
+
+        if self.merge_video_path and self.merge_audio_path:
+            self.merge_video_audio()
+
+        for x in range(self.merge_va_table.rowCount()):
+            file = self.merge_va_table.item(x, 0).text()
+            _, ext = os.path.splitext(file)
+            if ext[1:] in ALLOW_AUDIO_TYPE:
+                self.merge_audio_path = file
+            elif ext[1:] in ALLOW_VIDEO_TYPE:
+                self.merge_video_path = file
+
+            if self.merge_video_path and self.merge_audio_path:
+                self.merge_video_audio()
+                break
+
+    def merge_video_audio(self):
+        cmd = f'''mp4box.exe -add "{self.merge_video_path}#trackID=1:name=" -add "{self.merge_audio_path}#trackID=1:name=" -new "{self.merge_video_path}_merge.mp4"'''
+        print(cmd)
+        try:
+            with os.popen(cmd) as f:
+                print(f.read())
+        except Exception as e:
+            print(e)
+            os.remove(f"{self.merge_video_path}_merge.mp4")
+            return
 
 
 class Cmder(QThread):

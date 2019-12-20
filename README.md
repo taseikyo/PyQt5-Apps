@@ -84,7 +84,7 @@ A simple [Cat Calendar](cat-calendar) image generator that uses the "www.dutanga
 
 ### FFmpeg Helper
 
-[FFmpeg Helper](ffmpeg-helper) is a FFmpeg-based tool to cut/merge video and extract audio from the video.
+[FFmpeg Helper](ffmpeg-helper) is a FFmpeg-based tool to cut/merge video, extract audio from the video and merge video & audio to new video.
 
 <div align="center">
     <img src="images/ffmpeg-helper.gif" alt="FFmpeg Helper" title="FFmpeg Helper" />
