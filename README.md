@@ -96,3 +96,16 @@ If you think these apps are useful, you can buy me a cup of coffee :P
 	<img src="images/alipay.png" alt="alipay" title="非常感谢请我喝一杯咖啡:D" width="300">
 	<img src="images/wechatpay.png" alt="wechatpay" title="非常感谢请我喝一杯咖啡:D" width="300">
 </div>
+
+### Thanks list
+Thanks a lot for your generosity :3
+
+|  name                | date        | money  | Q/msg  | A/reply|
+|  ----                | ----        | ----   | ----   |----    |
+| David Cheung张晓翔/W | 2019/12/26  | 50      | | |
+| *井学/A              | 2019/12/14  | 20      |请教一下 style.qss 要怎样写？ | 我看来其实是跟 css 是差不多的，具体可以参考 [官网文档](https://doc.qt.io/qt-5/stylesheet-examples.html)，另外有问题可以提 [issue](https://github.com/taseikyo/PyQt5-Apps/issues) 啊 :3 |
+| *艾周/A              | 2019/04/08  | 10      | | |
+| *生/W                | 2018/08/02  | 1       |亿圆 四舍五入就是。 | |
+
+### LICENSE
+Copyright (c) 2018 Lewis Tian. Licensed under the MIT license.
