@@ -264,6 +264,16 @@
            </spacer>
           </item>
           <item>
+           <widget class="QToolButton" name="clear_video_files_btn">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string>Clear</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QToolButton" name="select_video_files_btn">
             <property name="minimumSize">
              <size>
@@ -337,6 +347,16 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QToolButton" name="clear_va_files_btn">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string>Clear</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QToolButton" name="select_va_files_btn">

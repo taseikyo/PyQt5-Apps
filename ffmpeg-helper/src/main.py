@@ -18,7 +18,15 @@ from mwin import Ui_MWin
 DURATION_MODE = 0
 ENDTIME_MODE = 1
 
-ALLOW_VIDEO_TYPE = ["mp4", "avi", "mkv", "ts", "rmvb", "rm", "mov"]
+ALLOW_VIDEO_TYPE = [
+    "mp4",
+    "avi",
+    "mkv",
+    "ts",
+    "rmvb",
+    "rm",
+    "mov",
+]
 ALLOW_AUDIO_TYPE = ["m4a", "mp3", "acc", "wav", "flac"]
 
 
@@ -50,31 +58,41 @@ class MWin(QMainWindow, Ui_MWin):
             if self.tabWidget.currentIndex() in (0, 1)
             else ALLOW_VIDEO_TYPE + ALLOW_AUDIO_TYPE
         )
-        _, ext = os.path.splitext(e.mimeData().text())
-        if ext[1:] in allow_type:
-            e.accept()
-        else:
-            e.ignore()
+        for file in e.mimeData().urls():
+            _, ext = os.path.splitext(file.toLocalFile())
+            if ext[1:] in allow_type:
+                e.accept()
+            else:
+                e.ignore()
 
     def dropEvent(self, e):
         # e.mimeData().text() = file:///F:videio/xxx.mp4
         filename = e.mimeData().text()[8:]
         tab_index = self.tabWidget.currentIndex()
         if tab_index == 0:
+            # process one file at a time
             self.cut_file_path = filename
             self.filename_label.setText(os.path.basename(filename))
             self.log_edit.setPlainText("")
         elif tab_index == 1:
-            row = self.merge_video_table.rowCount()
-            if row == 0:
-                self.merge_video_table.setRowCount(0)
-                self.merge_video_table.setColumnCount(1)
-                self.merge_video_table.setHorizontalHeaderLabels(["Merge Filenames"])
-                self.merge_video_table.horizontalHeader().setStretchLastSection(True)
-            self.merge_files_path.append(filename)
-            self.merge_video_table.insertRow(row)
-            self.merge_video_table.setItem(row, 0, QTableWidgetItem(filename))
+            # process multiple files at a time
+            for file in e.mimeData().urls():
+                filename = file.toLocalFile()
+                row = self.merge_video_table.rowCount()
+                if row == 0:
+                    self.merge_video_table.setRowCount(0)
+                    self.merge_video_table.setColumnCount(1)
+                    self.merge_video_table.setHorizontalHeaderLabels(
+                        ["Merge Filenames"]
+                    )
+                    self.merge_video_table.horizontalHeader().setStretchLastSection(
+                        True
+                    )
+                self.merge_files_path.append(filename)
+                self.merge_video_table.insertRow(row)
+                self.merge_video_table.setItem(row, 0, QTableWidgetItem(filename))
         else:
+            # process one audio and video file at a time
             row = self.merge_va_table.rowCount()
             if row == 0:
                 self.merge_va_table.setRowCount(0)
@@ -207,6 +225,16 @@ class MWin(QMainWindow, Ui_MWin):
             self.merge_video_table.setItem(x, 0, QTableWidgetItem(files[x]))
 
     @pyqtSlot()
+    def on_clear_video_files_btn_clicked(self):
+        self.merge_files_path = []
+
+        self.merge_video_table.clearContents()
+        self.merge_video_table.setRowCount(0)
+        self.merge_video_table.setColumnCount(1)
+        self.merge_video_table.setHorizontalHeaderLabels(["Merge Filenames"])
+        self.merge_video_table.horizontalHeader().setStretchLastSection(True)
+
+    @pyqtSlot()
     def on_start_merge_video_btn_clicked(self):
         if not self.merge_files_path or len(self.merge_files_path) < 2:
             return
@@ -276,6 +304,17 @@ class MWin(QMainWindow, Ui_MWin):
             self.merge_va_table.setItem(x, 0, QTableWidgetItem(files[x]))
 
     @pyqtSlot()
+    def on_clear_va_files_btn_clicked(self):
+        self.merge_video_path = ""
+        self.merge_audio_path = ""
+
+        self.merge_va_table.clearContents()
+        self.merge_va_table.setRowCount(0)
+        self.merge_va_table.setColumnCount(1)
+        self.merge_va_table.setHorizontalHeaderLabels(["Merge Filenames"])
+        self.merge_va_table.horizontalHeader().setStretchLastSection(True)
+
+    @pyqtSlot()
     def on_start_merge_va_btn_clicked(self):
         if self.merge_va_table.rowCount() < 2:
             return
@@ -319,7 +358,7 @@ class Cmder(QThread):
     def run(self):
         try:
             p = subprocess.Popen(
-                self.cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+                self.cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
             )
             for line in iter(p.stdout.readline, b""):
                 try:

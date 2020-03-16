@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mwin.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.1
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -126,6 +126,10 @@ class Ui_MWin(object):
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_6.addItem(spacerItem1)
+        self.clear_video_files_btn = QtWidgets.QToolButton(self.tab_2)
+        self.clear_video_files_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.clear_video_files_btn.setObjectName("clear_video_files_btn")
+        self.horizontalLayout_6.addWidget(self.clear_video_files_btn)
         self.select_video_files_btn = QtWidgets.QToolButton(self.tab_2)
         self.select_video_files_btn.setMinimumSize(QtCore.QSize(85, 0))
         self.select_video_files_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -158,6 +162,10 @@ class Ui_MWin(object):
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_7.addItem(spacerItem2)
+        self.clear_va_files_btn = QtWidgets.QToolButton(self.tab_3)
+        self.clear_va_files_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.clear_va_files_btn.setObjectName("clear_va_files_btn")
+        self.horizontalLayout_7.addWidget(self.clear_va_files_btn)
         self.select_va_files_btn = QtWidgets.QToolButton(self.tab_3)
         self.select_va_files_btn.setMinimumSize(QtCore.QSize(85, 0))
         self.select_va_files_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -195,9 +203,11 @@ class Ui_MWin(object):
         self.extract_btn.setText(_translate("MWin", "Extract Audio"))
         self.start_btn.setText(_translate("MWin", " Start "))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_1), _translate("MWin", "Cut"))
+        self.clear_video_files_btn.setText(_translate("MWin", "Clear"))
         self.select_video_files_btn.setText(_translate("MWin", "Select Files"))
         self.start_merge_video_btn.setText(_translate("MWin", "Merge"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MWin", "Merge Videos"))
+        self.clear_va_files_btn.setText(_translate("MWin", "Clear"))
         self.select_va_files_btn.setText(_translate("MWin", "Select Files"))
         self.start_merge_va_btn.setText(_translate("MWin", "Merge"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MWin", "Merge V/A"))
