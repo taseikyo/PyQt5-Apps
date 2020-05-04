@@ -163,9 +163,8 @@ class MWin(QMainWindow, Ui_MWin):
         if not self.cut_file_path:
             return
 
-        path, file = os.path.split(self.cut_file_path)
-
-        cmd = f'''ffmpeg -i "{self.cut_file_path}" -vn -y -acodec copy "{path}/{file.split('.')[0]}.m4a"'''
+        name, _ = os.path.splitext(self.cut_file_path)
+        cmd = f'''ffmpeg -i "{self.cut_file_path}" -vn -y -acodec copy "{name}.m4a"'''
         self.cmder_thread.cmd = cmd
         self.cmder_thread.start()
 
@@ -243,10 +242,9 @@ class MWin(QMainWindow, Ui_MWin):
         out_dir = os.path.split(self.merge_files_path[0])[0]
         # transform
         for x in self.merge_files_path:
-            tmp = os.path.split(x)
-            out_file = tmp[0] + "/" + tmp[1].split(".")[0] + ".ts"
-            ts_files.append(tmp[1].split(".")[0] + ".ts")
-            cmd = f'ffmpeg -i "{x}" -acodec copy -vcodec copy -absf aac_adtstoasc -y "{out_file}"'
+            out_file, _ = os.path.splitext(x)
+            ts_files.append(f"{out_file}.ts")
+            cmd = f'ffmpeg -i "{x}" -acodec copy -vcodec copy -absf aac_adtstoasc -y "{out_file}.ts"'
             try:
                 with os.popen(cmd) as f:
                     print(f.read())
