@@ -23,7 +23,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>猫耳FM 1.0 - ©Tich</string>
+   <string>猫耳FM</string>
   </property>
   <property name="windowIcon">
    <iconset resource="res.qrc">
@@ -207,11 +207,11 @@
             <attribute name="horizontalHeaderCascadingSectionResizes">
              <bool>false</bool>
             </attribute>
-            <attribute name="horizontalHeaderDefaultSectionSize">
-             <number>250</number>
-            </attribute>
             <attribute name="horizontalHeaderMinimumSectionSize">
              <number>50</number>
+            </attribute>
+            <attribute name="horizontalHeaderDefaultSectionSize">
+             <number>250</number>
             </attribute>
             <attribute name="horizontalHeaderStretchLastSection">
              <bool>true</bool>
@@ -222,10 +222,10 @@
             <attribute name="verticalHeaderCascadingSectionResizes">
              <bool>false</bool>
             </attribute>
-            <attribute name="verticalHeaderDefaultSectionSize">
-             <number>30</number>
-            </attribute>
             <attribute name="verticalHeaderMinimumSectionSize">
+             <number>35</number>
+            </attribute>
+            <attribute name="verticalHeaderDefaultSectionSize">
              <number>35</number>
             </attribute>
             <attribute name="verticalHeaderShowSortIndicator" stdset="0">
@@ -320,6 +320,13 @@
             </property>
             <property name="text">
              <string>打开保存文件夹</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="clearBtn">
+            <property name="text">
+             <string>清除已完成</string>
             </property>
            </widget>
           </item>
