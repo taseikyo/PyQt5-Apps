@@ -1,8 +1,8 @@
 #-------------------------------------------------
 #
 # Project created by Lewis Tian 2018-08-25T11:50:41
-# Email: lewissmith@126.com
-# Link: https://lewistian.github.io/
+# Email: taseikyo@gmail.com
+# Link: https://taseikyo.github.io/
 #
 #-------------------------------------------------
 

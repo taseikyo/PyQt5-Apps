@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'mwin.ui'
+# Form implementation generated from reading ui file 'missevan-kit\mwin.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.14.2
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_MWin(object):
     def setupUi(self, MWin):
@@ -108,7 +110,7 @@ class Ui_MWin(object):
         self.tableWidget.horizontalHeader().setStretchLastSection(True)
         self.tableWidget.verticalHeader().setVisible(False)
         self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
-        self.tableWidget.verticalHeader().setDefaultSectionSize(30)
+        self.tableWidget.verticalHeader().setDefaultSectionSize(35)
         self.tableWidget.verticalHeader().setMinimumSectionSize(35)
         self.tableWidget.verticalHeader().setSortIndicatorShown(False)
         self.tableWidget.verticalHeader().setStretchLastSection(False)
@@ -151,6 +153,10 @@ class Ui_MWin(object):
         self.toolButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toolButton.setObjectName("toolButton")
         self.horizontalLayout_3.addWidget(self.toolButton)
+        # self.clearBtn = QtWidgets.QToolButton(self.tab2)
+        # self.clearBtn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        # self.clearBtn.setObjectName("clearBtn")
+        # self.horizontalLayout_3.addWidget(self.clearBtn)
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(":/images/m2.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -219,7 +225,7 @@ class Ui_MWin(object):
 
     def retranslateUi(self, MWin):
         _translate = QtCore.QCoreApplication.translate
-        MWin.setWindowTitle(_translate("MWin", "猫耳FM 1.0 - ©Tich"))
+        MWin.setWindowTitle(_translate("MWin", "猫耳FM"))
         self.comboBox.setItemText(0, _translate("MWin", "单音声"))
         self.comboBox.setItemText(1, _translate("MWin", "用户音声"))
         self.comboBox.setItemText(2, _translate("MWin", "用户喜欢音声"))
@@ -237,15 +243,15 @@ class Ui_MWin(object):
         item = self.tableWidget2.horizontalHeaderItem(1)
         item.setText(_translate("MWin", "下载进度"))
         self.toolButton.setText(_translate("MWin", "打开保存文件夹"))
+        # self.clearBtn.setText(_translate("MWin", "清除已完成"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), _translate("MWin", "下载"))
-        self.plainTextEdit.setPlainText(_translate("MWin", "GitHub：LewisTian\n"
-"Email：lewissmith@126.com\n"
-"详细介绍：https://github.com/LewisTian/PyQt5-Apps/tree/master/missevan-kit\n"
+        self.plainTextEdit.setPlainText(_translate("MWin", "GitHub：Lewis Tian\n"
+"Email：taseikyo@gmail.com\n"
+"详细介绍：https://github.com/taseikyo/PyQt5-Apps/tree/master/missevan-kit\n"
 "-----\n"
 "猫耳FM工具箱 V1.0\n"
 "主要功能是批量下载猫耳上的音声\n"
 "暂时仅支持获取单音声、用户上传音声以及用户喜欢的音声"))
         self.label.setText(_translate("MWin", "若是觉得好用欢迎投喂："))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab3), _translate("MWin", "关于"))
-
 import res_rc
