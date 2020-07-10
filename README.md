@@ -11,6 +11,7 @@ All image resources in this repo are from [iconfont](http://www.iconfont.cn).
 | ------------------------------ | ------------------------------ | -------------------------------| ------------------------------ | ------------------------------- |
 | [Google Translate](#google-translate) | [Bilibili Kit](#bilibili-kit) | [Words Recorder](#words-recorder) | [HUST Electricity Fee](#hust-electricity-fee) | [Missevan Kit](#missevan-kit) |
 | [Lossless Music Box](#lossless-music-box) | [HUST Lib](#hust-lib) | [WordCloud Generator](#wordcloud-generator) | [Cat Calendar](#cat-calendar) | [FFmpeg Helper](#ffmpeg-helper)  |
+| [Pangu](#pangu) |  | | | |
 
 ### Google Translate
 [Google Translate](google-translate) is a translation app using [Google translate api](https://github.com/ssut/py-googletrans).
@@ -88,6 +89,14 @@ A simple [Cat Calendar](cat-calendar) image generator that uses the "www.dutanga
 
 <div align="center">
     <img src="images/ffmpeg-helper.gif" alt="FFmpeg Helper" title="FFmpeg Helper" />
+</div>
+
+### Pangu
+
+[Pangu](pangu): can't you add spaces?
+
+<div align="center">
+    <img src="images/pangu.gif" alt="Pangu" title="Pangu" />
 </div>
 
 ### Donation
