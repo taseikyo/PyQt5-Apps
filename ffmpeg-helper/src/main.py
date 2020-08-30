@@ -179,9 +179,7 @@ class MWin(QMainWindow, Ui_MWin):
                 tmp = int(x) + carry
                 if tmp > 59:
                     carry = tmp // 60
-                    tmp -= 60
-                else:
-                    carry = 0
+                    tmp %= 60
                 time_legal.append(str(tmp))
             except:
                 return ""
